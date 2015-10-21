@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+	<context:annotation-config />
+	<context:component-scan base-package="com.i9144.xpage" />
+	<aop:aspectj-autoproxy />
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${mysql.driver}" />
+		<property name="jdbcUrl" value="${liveshowcms.jdbc.url}" />
+		<property name="user" value="${liveshowcms.jdbc.username}" />
+		<property name="password" value="${liveshowcms.jdbc.password}" />
+		<property name="initialPoolSize" value="${liveshowcms.initialPoolSize}"/>
+		<property name="minPoolSize" value="${liveshowcms.minPoolSize}"/>
+		<property name="maxPoolSize" value="${liveshowcms.maxPoolSize}"/>
+		<property name="acquireIncrement" value="${liveshowcms.acquireIncrement}"/>
+		<property name="maxIdleTime" value="${liveshowcms.maxIdleTime}"/>
+		<property name="checkoutTimeout" value="${liveshowcms.checkoutTimeout}"/>
+		<property name="testConnectionOnCheckin" value="true"/>
+	</bean>
+	
+	 <bean id="sqlMapClient"
+        class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+        <property name="sqlMapClient">
+            <bean
+                class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+                <property name="configLocation"
+                    value="classpath:sqlmap-config.xml" />
+                <property name="dataSource" ref="dataSource" />
+            </bean>
+        </property>
+    </bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="suffix" value=".vm" />
+		<property name="prefix" value="WEB-INF/tpl/" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="exposeRequestAttributes" value="true" />
+		<!--toolbox配置文件路径 -->
+		<property name="toolboxConfigLocation" value="WEB-INF/classes/toolbox.xml" />
+	</bean>
+	<bean id="velocityConfig"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="" />
+		<property name="configLocation" value="classpath:velocity.properties" />
+	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- set the max upload size100MB -->
+		<property name="maxUploadSize">
+			<value>104857600</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,8 @@
+#parse("/WEB-INF/tpl/common/header.vm")
+<div class="bs-docs-header" id="content" tabindex="-1">
+	<div class="container">
+		<h1>首页	<a href=""><span class="label label-default">预览</span></a></h1>
+        <p>首页模块管理</p>
+	</div>
+</div>
+#parse("/WEB-INF/tpl/common/footer.vm")

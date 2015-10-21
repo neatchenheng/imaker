@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="PluginDAO">
+	<resultMap class="com.i9144.xpage.model.Plugin" id="plugin">
+		<result property="id" column="id"/>
+		<result property="pluginId" column="plugin_id"/>
+		<result property="name" column="name"/>
+		<result property="theme" column="theme"/>
+		<result property="mold" column="mold"/>
+		<result property="style" column="style"/>
+		<result property="adFlag" column="ad_flag"/>
+		<result property="status" column="status"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<resultMap class="com.i9144.xpage.model.PluginDevice" id="device">
+		<result property="id" column="id"/>
+		<result property="pluginId" column="plugin_id"/>
+		<result property="deviceType" column="device_type"/>
+		<result property="cssType" column="css_type"/>
+		<result property="cssLink" column="css_link"/>
+		<result property="cssCode" column="css_code"/>
+		<result property="jsType" column="js_type"/>
+		<result property="jsLink" column="js_link"/>
+		<result property="jsCode" column="js_code"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<!-- Plugin -->
+	<insert id="add" parameterClass="com.i9144.xpage.model.Plugin">
+        INSERT INTO tb_plugin(plugin_id,name,theme,mold,style,status,ad_flag,create_time,update_time)
+        VALUES (#pluginId#,#name#,#theme#,#mold#,#style#,#status#,#adFlag#,#createTime#,#updateTime#)
+	</insert>
+
+	<delete id="delete" parameterClass="int">
+	    DELETE FROM tb_plugin WHERE id=#id#
+	</delete>
+	
+	<update id="update" parameterClass="com.i9144.xpage.model.Plugin">
+	    UPDATE tb_plugin 
+	    SET name=#name#,theme=#theme#,mold=#mold#,style=#style#,ad_flag=#adFlag#,update_time=#updateTime#
+	    WHERE id=#id#
+	</update>
+	
+	<select id="list" resultMap="plugin" >
+	    SELECT * FROM tb_plugin ORDER BY update_time DESC
+	</select>		
+	
+	<select id="count" resultClass="int"  >
+	    SELECT count(id) FROM tb_plugin 
+	</select>	 
+	
+	<select id="get" resultMap="plugin" parameterClass="int">
+	    SELECT * FROM tb_plugin WHERE id=#id#
+	</select>
+	
+	<select id="getByPluginId" resultMap="plugin" parameterClass="int">
+	    SELECT * FROM tb_plugin WHERE plugin_id=#pluginId#
+	</select>
+	
+	<!--  Plugin Device -->
+	<insert id="addPluginDevice" parameterClass="com.i9144.xpage.model.PluginDevice">
+	   INSERT INTO  tb_plugin_device(plugin_id,device_type,create_time,update_time)
+	   VALUES (#pluginId#,#deviceType#,#createTime#,#updateTime#)
+	</insert>
+	
+	<select id="getPluginDevice" resultMap="device" parameterClass="int">
+	    SELECT * FROM tb_plugin_device WHERE plugin_id=#pluginId#
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,18 @@
+.bs-docs-header {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-bottom: 40px;
+    font-size: 24px;
+    text-align: left;
+    position: relative;
+    padding: 30px 0;
+    color: #cdbfe3;
+    text-shadow: 0 1px 0 rgba(0,0,0,.1);
+    background-color: #6f5499;
+    background-image: linear-gradient(to bottom,#563d7c 0,#6f5499 100%);
+    background-repeat: repeat-x;
+}
+
+.bs-docs-nav {
+	margin-bottom: 0px;
+} 
