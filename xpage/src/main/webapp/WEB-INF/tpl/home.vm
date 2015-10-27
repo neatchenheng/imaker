@@ -5,4 +5,5 @@
         <p>首页模块管理</p>
 	</div>
 </div>
+#parse("/WEB-INF/tpl/common/js.vm")
 #parse("/WEB-INF/tpl/common/footer.vm")

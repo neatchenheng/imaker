@@ -26,10 +26,8 @@
 			<tr>
 				<th>ID</th>
 				<th>名称</th>
-				<th>版本</th>
+				<th>主题</th>
 				<th>设备</th>
-				<th>类型</th>
-				<th>广告</th>
 				<th>状态</th>
 				<th>操作</th>
 			</tr>
@@ -38,46 +36,18 @@
 			#foreach($plugin in $plugins)
     			<tr 
     				data-id="$plugin.id" 
-					data-pluginId="$plugin.pluginId" 
+					data-plugin_id="$plugin.pluginId" 
     				data-name="$!plugin.name"
-					data-mold="$plugin.mold"
 					data-theme="$plugin.theme"
-					data-mold="$plugin.mold"
+					data-device="$plugin.device"
 					data-status="$plugin.status"
-					data-adFlag="$plugin.adFlag"
-					data-style="$plugin.style">
+					>
     				<td>$plugin.pluginId</td>
     				<td>$!plugin.name</td>
-    				<td>$plugin.theme</td>
-					<td>
-						#foreach($dt in $plugin.deviceTypes)
-							#if($dt == '1') pc端
-							#elseif ($dt == '2') phone端
-							#end
-						#end
-					</td>
-    				<td>
-						#if($plugin.mold == 1) 通栏
-						#elseif($plugin.mold == 2) 左宽
-						#elseif($plugin.mold == 3) 中宽
-						#elseif($plugin.mold == 4) 右宽
-						#elseif($plugin.mold == 5) 中宽-首页
-						#elseif($plugin.mold == 6) 左窄
-						#elseif($plugin.mold == 7) 右窄
-						#elseif($plugin.mold == 8) 左窄-首页
-						#elseif($plugin.mold == 0) 固定
-						#end
-					</td>
-					<td>#if($plugin.ad_flag == 1) 开启 #else 关闭 #end</td>
+    				<td>#if ($plugin.theme==100) 2015v1 #end</td>
+					<td>#if ($plugin.device==100) PC端 #elseif ($plugin.device==200) Phone端 #end</td>
     				<td>#if($plugin.status == 1) 正常 #else 关闭 #end</td>
-    				<td>#if($plugin.style == '1') <a href="#" dt='1' class="edit-style">pc样式</a>
-						#elseif($plugin.style == '2')<a href="#" dt='2' class="edit-style">phone样式</a>
-						#elseif($plugin.style == '1,2' || $plugin.style == '2,1') 
-							<a href="#" dt='1' class="edit-style">pc样式</a> | <a href="#" dt='2' class="edit-style">phone样式</a>
-						#end
-						 | <a href="#" data-toggle="modal" data-target="#editPluginTemplate">修改</a></td>
-					<td>
-					</td>
+    				<td><a href="#" data-toggle="modal" data-target="#editPluginTemplate">修改</a></td>
     			</tr>
 			#end
 		</tbody>
@@ -109,54 +79,19 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="device_type" class="col-sm-2 control-label">设备类型:</label>
-					<div class="col-sm-10">
-  						<div class="checkbox">
-							<label><input type="checkbox" value="1" name="deviceTypes" checked>PC端</label>
-						</div>
-						<div class="checkbox disabled">
-							<label><input type="checkbox" value="2" name="deviceTypes">PHONE端</label>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
 					<label for="theme" class="col-sm-2 control-label">全局主题:</label>
 					<div class="col-sm-10">
 						<select class="form-control" name="theme">
-							<option value="1">2015V1</option>
+							<option value="100">2015V1</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="mold" class="col-sm-2 control-label">模型:</label>
+					<label for="device" class="col-sm-2 control-label">设备类型:</label>
 					<div class="col-sm-10">
-						<select class="form-control" name="mold">
-							<option value="1">通栏</option>
-							<option value="2">左宽</option>
-							<option value="3">中宽</option>
-							<option value="4">右宽</option>
-							<option value="5">左窄</option>
-							<option value="6">右窄</option>
-							<option value="0">固定</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="style" class="col-sm-2 control-label">样式:</label>
-					<div class="col-sm-10">
-						<select class="form-control" name="style">
-							<option value="1">横图</option>
-							<option value="2">方图</option>
-							<option value="3">竖图</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
-				<label for="adFlag" class="col-sm-2 control-label">广告:</label>
-					<div class="col-sm-10">
-						<select class="form-control" name="adFlag">
-							<option value="0">关闭</option>
-							<option value="1">开启</option>
+						<select class="form-control" name="device">
+							<option value="100">PC端</option>
+							<option value="200">PHONE端</option>
 						</select>
 					</div>
 				</div>
@@ -273,16 +208,6 @@
       	</div>
 	</div>
 </div>
-#parse("/WEB-INF/tpl/common/footer.vm")
+#parse("/WEB-INF/tpl/common/js.vm")
 
-<script>
-	$("#editPluginTemplate").on("show.bs.modal",function(event) {
-		var a = $(event.relatedTarget);
-		var tr = a.parent().parent();
-		var model = $(this);
-		model.find(".modal-content form").attr("action","../plugins/" + tr.data("id"));
-		var pi = model.find(".modal-body input[name='pluginId']");
-		pi.val(tr.data("pluginId"));
-		model.find(".modal-body input[name='pluginId']").val(tr.data("pluginId"));
-	});
-</script>
+#parse("/WEB-INF/tpl/common/footer.vm")
