@@ -36,4 +36,11 @@ public class PluginService {
 		List<Plugin> ps = pluginDao.list();
 		return ps;
 	}
+	
+	public int update(Plugin plugin) {
+		logger.debug(">>>> update plugin: " + plugin);
+		Date now = new Date();
+		plugin.setUpdateTime(now);
+		return pluginDao.update(plugin);
+	}
 }

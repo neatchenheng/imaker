@@ -26,7 +26,7 @@
 	
 	<update id="update" parameterClass="com.i9144.xpage.model.Plugin">
 	    UPDATE tb_plugin 
-	    SET name=#name#,update_time=#updateTime#
+	    SET name=#name#, status=#status#, update_time=#updateTime#
 	    WHERE id=#id#
 	</update>
 	

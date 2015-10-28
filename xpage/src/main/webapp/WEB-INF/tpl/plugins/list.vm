@@ -139,57 +139,23 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="device_type" class="col-sm-2 control-label">设备类型:</label>
-					<div class="col-sm-10">
-  						<div class="checkbox">
-							<label><input type="checkbox" value="1" name="deviceTypes" disabled>PC端</label>
-						</div>
-						<div class="checkbox disabled">
-							<label><input type="checkbox" value="2" name="deviceTypes" disabled>PHONE端</label>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
 					<label for="theme" class="col-sm-2 control-label">全局主题:</label>
 					<div class="col-sm-10">
 						<select class="form-control" name="theme" disabled>
-							<option value="1">2015V1</option>
+							<option value="100">2015V1</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="mold" class="col-sm-2 control-label">模型:</label>
+					<label for="device" class="col-sm-2 control-label">设备类型:</label>
 					<div class="col-sm-10">
-						<select class="form-control" name="mold" disabled>
-							<option value="1">通栏</option>
-							<option value="2">左宽</option>
-							<option value="3">中宽</option>
-							<option value="4">右宽</option>
-							<option value="5">左窄</option>
-							<option value="6">右窄</option>
-							<option value="0">固定</option>
+						<select class="form-control" name="device" disabled>
+							<option value="100">PC端</option>
+							<option value="200">PHONE端</option>
 						</select>
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="style" class="col-sm-2 control-label">样式:</label>
-					<div class="col-sm-10">
-						<select class="form-control" name="style" disabled>
-							<option value="1">横图</option>
-							<option value="2">方图</option>
-							<option value="3">竖图</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
-				<label for="adFlag" class="col-sm-2 control-label">广告:</label>
-					<div class="col-sm-10">
-						<select class="form-control" name="adFlag">
-							<option value="0">关闭</option>
-							<option value="1">开启</option>
-						</select>
-					</div>
-				</div>
+				
 				<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">状态:</label>
 					<div class="col-sm-10">
@@ -209,5 +175,23 @@
 	</div>
 </div>
 #parse("/WEB-INF/tpl/common/js.vm")
+<script>
+	$("#editPluginTemplate").on("show.bs.modal",function(event) {
+		var tr = $(event.relatedTarget).closest('tr');
+		var id = tr.data("id");
+		var pluginId = tr.data("plugin_id");
+		var name = tr.data("name");
+		var theme = tr.data("theme");
+		var device = tr.data("device");
+		var status = tr.data("status");
+		var modal = $(this);
+		modal.find(".modal-content form").attr("action","../plugins/" + id);
+		modal.find(".modal-body input[name='pluginId']").val(pluginId);
+		modal.find(".modal-body input[name='name']").val(name);
+		modal.find(".modal-body select[name='theme']").val(theme);
+		modal.find(".modal-body select[name='device']").val(device);
+		modal.find(".modal-body select[name='status']").val(status);
+	});
+</script>
 
 #parse("/WEB-INF/tpl/common/footer.vm")
