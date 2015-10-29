@@ -13,43 +13,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.i9144.xpage.exception.HelperException;
-import com.i9144.xpage.model.Plugin;
-import com.i9144.xpage.service.PluginService;
+import com.i9144.xpage.model.Channel;
+import com.i9144.xpage.service.ChannelService;
 
 @Controller
-@RequestMapping(value = "/plugins/")
-public class PluginAction {
-	private static final Logger logger = Logger.getLogger(PluginAction.class);
+@RequestMapping(value = "/channels/")
+public class ChannelAction {
+	private static final Logger logger = Logger.getLogger(ChannelAction.class);
 	@Resource
-	private PluginService pluginService;
+	private ChannelService channelService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String list(Model model) {
-		List<Plugin> plugins = pluginService.list();
-		model.addAttribute("plugins", plugins);
-		return "/plugins/list";
+		List<Channel> channels = channelService.list();
+		model.addAttribute("channels", channels);
+		return "/channels/list";
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String save(Model model, @ModelAttribute Plugin plugin) {
+	public String save(Model model, @ModelAttribute Channel channel) {
 		try {
-			pluginService.add(plugin);
+			channelService.add(channel);
 		} catch (HelperException e) {
 			logger.warn("!!!! " + e.getMessage());
 			model.addAttribute("message", e.getMessage());
 		}
-		List<Plugin> plugins = pluginService.list();
-		model.addAttribute("plugins", plugins);
-		return "/plugins/list";
+		List<Channel> channels = channelService.list();
+		model.addAttribute("channels", channels);
+		return "/channels/list";
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.POST)
 	public String update(Model model, @PathVariable("id") int id,
-			@ModelAttribute Plugin plugin) {
-		plugin.setId(id);
-		pluginService.update(plugin);
-		List<Plugin> plugins = pluginService.list();
-		model.addAttribute("plugins", plugins);
-		return "/plugins/list";
+			@ModelAttribute Channel channel) {
+		channel.setId(id);
+		channelService.update(channel);
+		List<Channel> channels = channelService.list();
+		model.addAttribute("channels", channels);
+		return "/channels/list";
 	}
 }

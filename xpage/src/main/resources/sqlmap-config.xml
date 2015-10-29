@@ -8,4 +8,5 @@
 	<settings useStatementNamespaces="true"  enhancementEnabled="true" 
 		errorTracingEnabled="true" lazyLoadingEnabled="false"/>
 	<sqlMap resource="com/i9144/xpage/dao/PluginDAO.xml"/>
+	<sqlMap resource="com/i9144/xpage/dao/ChannelDAO.xml"/>
 </sqlMapConfig>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ChannelDAO">
+	<resultMap class="com.i9144.xpage.model.Channel" id="channel">
+		<result property="id" column="id"/>
+		<result property="channelId" column="channel_id"/>
+		<result property="name" column="name"/>
+		<result property="url" column="url"/>
+		<result property="editor" column="editor"/>
+		<result property="status" column="status"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- Channel -->
+	<insert id="add" parameterClass="com.i9144.xpage.model.Channel">
+        INSERT INTO tb_channel(channel_id,name,url,editor,status,create_time,update_time)
+        VALUES (#channelId#,#name#,#url#,#editor#,#status#,#createTime#,#updateTime#)
+	</insert>
+
+	<delete id="delete" parameterClass="int">
+	    DELETE FROM tb_channel WHERE id=#id#
+	</delete>
+	
+	<update id="update" parameterClass="com.i9144.xpage.model.Channel">
+	    UPDATE tb_channel
+	    SET name=#name#, url=#url#, editor=#editor#, status=#status#, update_time=#updateTime#
+	    WHERE id=#id#
+	</update>
+	
+	<select id="list" resultMap="channel" >
+	    SELECT * FROM tb_channel ORDER BY update_time DESC
+	</select>		
+	
+	<select id="count" resultClass="int"  >
+	    SELECT count(id) FROM tb_channel
+	</select>	 
+	
+	<select id="get" resultMap="channel" parameterClass="int">
+	    SELECT * FROM tb_channel WHERE id=#id#
+	</select>
+	
+	<select id="getByChannelId" resultMap="channel" parameterClass="int">
+	    SELECT * FROM tb_channel WHERE channel_id=#channelId#
+	</select>
+</sqlMap>
