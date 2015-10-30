@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.i9144.xpage.dao.ChannelDAO;
+import com.i9144.xpage.dao.PageDAO;
 import com.i9144.xpage.exception.HelperException;
 import com.i9144.xpage.model.Channel;
 
@@ -18,6 +19,8 @@ public class ChannelService {
 
 	@Resource
 	private ChannelDAO channelDao;
+	@Resource
+	private PageDAO pageDao;
 	
 	public void add(Channel channel) throws HelperException {
 		logger.debug(">>>> add channel: " + channel);
@@ -34,6 +37,10 @@ public class ChannelService {
 	public List<Channel> list() {
 		logger.debug(">>>> list Channels...");
 		List<Channel> cs = channelDao.list();
+		for (Channel c : cs) {
+			int pc = pageDao.getPageCountByChannelId(c.getChannelId());
+			c.setPageCount(pc);
+		}
 		return cs;
 	}
 	

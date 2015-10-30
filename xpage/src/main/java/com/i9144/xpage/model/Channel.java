@@ -21,6 +21,10 @@ public class Channel extends Model {
 	 * 状态,{0:关闭,1:正常}
 	 */
 	private int status;
+	/**
+	 * 当前频道下的页面数目
+	 */
+	private int pageCount;
 	private Date createTime;
 	private Date updateTime;
 	
@@ -65,6 +69,12 @@ public class Channel extends Model {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public int getPageCount() {
+		return pageCount;
+	}
+	public void setPageCount(int pageCount) {
+		this.pageCount = pageCount;
 	}
 	public Date getUpdateTime() {
 		return updateTime;

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="PageDAO">
+	<resultMap class="com.i9144.xpage.model.Page" id="page">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="title" column="title"/>
+		<result property="metaKeywords" column="meta_keywords"/>
+		<result property="metaDesc" column="meta_desc"/>
+		<result property="url" column="url"/>
+		<result property="editor" column="editor"/>
+		<result property="status" column="status"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- Page -->
+	<insert id="add" parameterClass="com.i9144.xpage.model.Page">
+        INSERT INTO tb_page(channel_id,name,title,meta_keywords,meta_desc,url,editor,status,create_time,update_time)
+        VALUES (#channelId#,#name#,#title#,#metaKeywords#,#metaDesc#,#url#,#editor#,#status#,#createTime#,#updateTime#)
+	</insert>
+
+	<delete id="delete" parameterClass="int">
+	    DELETE FROM tb_page WHERE id=#id#
+	</delete>
+	
+	<update id="update" parameterClass="com.i9144.xpage.model.Page">
+	    UPDATE tb_page
+	    SET name=#name#, title=#title#,meta_keywords=#metaKeywords#,meta_desc=#metaDesc#,url=#url#,editor=#editor#, status=#status#, update_time=#updateTime#
+	    WHERE id=#id#
+	</update>
+	
+	<select id="getPagesByChannelId" parameterClass="int" resultMap="page" >
+	    SELECT * FROM tb_page where channel_id = #channel_id# ORDER BY update_time DESC
+	</select>		
+	
+	<select id="getPageCountByChannelId" resultClass="int"  >
+	    SELECT count(id) FROM tb_page where channel_id = #channel_id#
+	</select>	 
+	
+	<select id="get" resultMap="page" parameterClass="int">
+	    SELECT * FROM tb_page WHERE id=#id#
+	</select>
+</sqlMap>
