@@ -18,7 +18,7 @@ import com.i9144.xpage.model.Page;
 import com.i9144.xpage.service.PageService;
 
 @Controller
-@RequestMapping(value = "/pages/")
+@RequestMapping(value = "/pages")
 public class PageAction {
 	private static final Logger logger = Logger.getLogger(PageAction.class);
 	@Resource
@@ -26,7 +26,7 @@ public class PageAction {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String list(Model model,
-			@RequestParam(value = "channelId", required = true) int channelId) {
+			@RequestParam(value = "cid", required = true) int channelId) {
 		List<Page> pages = pageService.listByChannelId(channelId);
 		model.addAttribute("pages", pages);
 		return "/pages/list";
@@ -34,7 +34,7 @@ public class PageAction {
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String save(Model model, @ModelAttribute Page page,
-			@RequestParam(value = "channelId", required = true) int channelId) {
+			@RequestParam(value = "cid", required = true) int channelId) {
 		try {
 			page.setChannelId(channelId);
 			pageService.add(page);
@@ -50,7 +50,7 @@ public class PageAction {
 	@RequestMapping(value = "{id}", method = RequestMethod.POST)
 	public String update(Model model, @PathVariable("id") int id,
 			@ModelAttribute Page page,
-			@RequestParam(value = "channelId", required = true) int channelId) {
+			@RequestParam(value = "cid", required = true) int channelId) {
 		page.setId(id);
 		pageService.update(page);
 		List<Page> pages = pageService.listByChannelId(channelId);

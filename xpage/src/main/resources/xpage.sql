@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v11.24 (32 bit)
-MySQL - 5.0.87-50-log : Database - liveshowcms
+MySQL - 5.0.87-50-log : Database - xpage
 *********************************************************************
 */
 
@@ -12,9 +12,9 @@ MySQL - 5.0.87-50-log : Database - liveshowcms
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`liveshowcms` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`xpage` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `liveshowcms`;
+USE `xpage`;
 
 /*Table structure for table `tb_channel` */
 

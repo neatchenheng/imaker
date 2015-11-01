@@ -3,9 +3,9 @@
 <div class="bs-docs-header" id="content" tabindex="-1">
 	<div class="container">
 		<h1>频道管理</h1>
-		<p>共有$!channels.size()个频道</p>
+		<p>共有$!pages.size()个频道</p>
 		<div class="btn-group" role="group">
-			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addChannelTemplate">
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addPageTemplate">
 				新建
 			</button>
 		</div>
@@ -34,21 +34,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			#foreach($channel in $channels)
+			#foreach($page in $pages)
     			<tr 
-    				data-id="$channel.id" 
-					data-channel_id="$channel.channelId" 
-    				data-name="$!channel.name"
-					data-url="$channel.url"
-					data-editor="$channel.editor"
-					data-status="$channel.status">
-    				<td>$channel.channelId</td>
-    				<td>$!channel.name</td>
-    				<td>$!channel.url</td>
-					<td>$!channel.editor</td>
-					<td><a href="../pages?cid=$channel.channelId">$!channel.pageCount</a></td>
-    				<td>#if($channel.status == 1) 正常 #else 关闭 #end</td>
-    				<td><a href="#" data-toggle="modal" data-target="#editChannelTemplate">修改</a></td>
+    				data-id="$page.id" 
+					data-channel_id="$page.channelId" 
+    				data-name="$!page.name"
+					data-url="$page.url"
+					data-editor="$page.editor"
+					data-status="$page.status">
+    				<td>$page.pageId</td>
+    				<td>$!page.name</td>
+    				<td>$!page.url</td>
+					<td>$!page.editor</td>
+					<td><a href="../pages?cid=$page.pageId">$!page.pageCount</a></td>
+    				<td>#if($page.status == 1) 正常 #else 关闭 #end</td>
+    				<td><a href="#" data-toggle="modal" data-target="#editPageTemplate">修改</a></td>
     			</tr>
 			#end
 		</tbody>
@@ -56,7 +56,7 @@
 </div>
 
 <!-- 新增插件 -->
-<div class="modal fade" id="addChannelTemplate" style="display:none">
+<div class="modal fade" id="addPageTemplate" style="display:none">
 	<div class="modal-dialog">
     	<div class="modal-content">
       		<div class="modal-header">
@@ -65,12 +65,12 @@
         		</button>
         		<h4 class="modal-title">新频道</h4>
        		</div>
-        	<form class="form-horizontal" method="post" action="../channels/">
+        	<form class="form-horizontal" method="post" action="../pages/">
        		<div class="modal-body">
     			<div class="form-group">
-					<label for="channelId" class="col-sm-2 control-label">ID:</label>
+					<label for="pageId" class="col-sm-2 control-label">ID:</label>
 					<div class="col-sm-10">
-  						<input type="text" class="form-control" id="channelId" name="channelId" placeholder="ID:" required>
+  						<input type="text" class="form-control" id="pageId" name="pageId" placeholder="ID:" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -111,7 +111,7 @@
 </div>
 
 <!-- 编辑插件 -->
-<div class="modal fade" id="editChannelTemplate" style="display:none">
+<div class="modal fade" id="editPageTemplate" style="display:none">
 	<div class="modal-dialog">
     	<div class="modal-content">
       		<div class="modal-header">
@@ -123,9 +123,9 @@
         	<form class="form-horizontal" method="post">
        		<div class="modal-body">
     			<div class="form-group">
-					<label for="channelId" class="col-sm-2 control-label">ID:</label>
+					<label for="pageId" class="col-sm-2 control-label">ID:</label>
 					<div class="col-sm-10">
-  						<input type="text" class="form-control" id="channelId" name="channelId" disabled>
+  						<input type="text" class="form-control" id="pageId" name="pageId" disabled>
 					</div>
 				</div>
 				<div class="form-group">
@@ -166,17 +166,17 @@
 </div>
 #parse("/WEB-INF/tpl/common/js.vm")
 <script>
-	$("#editChannelTemplate").on("show.bs.modal",function(event) {
+	$("#editPageTemplate").on("show.bs.modal",function(event) {
 		var tr = $(event.relatedTarget).closest('tr');
 		var id = tr.data("id");
-		var channelId = tr.data("channel_id");
+		var pageId = tr.data("page_id");
 		var name = tr.data("name");
 		var url = tr.data("url");
 		var editor = tr.data("editor");
 		var status = tr.data("status");
 		var modal = $(this);
-		modal.find(".modal-content form").attr("action","../channels/" + id);
-		modal.find(".modal-body input[name='channelId']").val(channelId);
+		modal.find(".modal-content form").attr("action","../pages/" + id);
+		modal.find(".modal-body input[name='pageId']").val(pageId);
 		modal.find(".modal-body input[name='name']").val(name);
 		modal.find(".modal-body input[name='url']").val(url);
 		modal.find(".modal-body input[name='editor']").val(editor);
