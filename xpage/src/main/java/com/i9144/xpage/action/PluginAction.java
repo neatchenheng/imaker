@@ -3,6 +3,7 @@ package com.i9144.xpage.action;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,7 @@ import com.i9144.xpage.model.Plugin;
 import com.i9144.xpage.service.PluginService;
 
 @Controller
-@RequestMapping(value = "/plugins/")
+@RequestMapping(value = "/plugins")
 public class PluginAction {
 	private static final Logger logger = Logger.getLogger(PluginAction.class);
 	@Resource
@@ -44,12 +45,10 @@ public class PluginAction {
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.POST)
-	public String update(Model model, @PathVariable("id") int id,
+	public String  update(HttpServletResponse response, Model model, @PathVariable("id") int id,
 			@ModelAttribute Plugin plugin) {
 		plugin.setId(id);
 		pluginService.update(plugin);
-		List<Plugin> plugins = pluginService.list();
-		model.addAttribute("plugins", plugins);
 		return "/plugins/list";
 	}
 }

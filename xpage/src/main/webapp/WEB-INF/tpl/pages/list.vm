@@ -65,7 +65,7 @@
         		</button>
         		<h4 class="modal-title">新频道</h4>
        		</div>
-        	<form class="form-horizontal" method="post" action="../pages/">
+        	<form class="form-horizontal" method="post" action="pages">
        		<div class="modal-body">
     			<div class="form-group">
 					<label for="pageId" class="col-sm-2 control-label">ID:</label>
@@ -175,7 +175,7 @@
 		var editor = tr.data("editor");
 		var status = tr.data("status");
 		var modal = $(this);
-		modal.find(".modal-content form").attr("action","../pages/" + id);
+		modal.find(".modal-content form").attr("action","pages/" + id);
 		modal.find(".modal-body input[name='pageId']").val(pageId);
 		modal.find(".modal-body input[name='name']").val(name);
 		modal.find(".modal-body input[name='url']").val(url);

@@ -64,7 +64,7 @@
         		</button>
         		<h4 class="modal-title">新插件</h4>
        		</div>
-        	<form class="form-horizontal" method="post" action="../plugins/">
+        	<form class="form-horizontal" method="post" action="plugins">
        		<div class="modal-body">
     			<div class="form-group">
 					<label for="pluginId" class="col-sm-2 control-label">ID:</label>
@@ -124,7 +124,7 @@
         		</button>
         		<h4 class="modal-title">编辑插件</h4>
        		</div>
-        	<form class="form-horizontal" method="post">
+        	<form class="form-horizontal" method="post" id="editPluginForm">
        		<div class="modal-body">
     			<div class="form-group">
 					<label for="pluginId" class="col-sm-2 control-label">ID:</label>
@@ -168,7 +168,7 @@
       		</div>
       		<div class="modal-footer">
         		<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        		<button type="submit" class="btn btn-primary">保存</button>
+        		<button id="editPluginButton" type="submit" class="btn btn-primary">保存</button>
       		</div>
       		</form>
       	</div>
@@ -185,13 +185,29 @@
 		var device = tr.data("device");
 		var status = tr.data("status");
 		var modal = $(this);
-		modal.find(".modal-content form").attr("action","../plugins/" + id);
+		modal.find(".modal-content form").attr("action","plugins/" + id);
 		modal.find(".modal-body input[name='pluginId']").val(pluginId);
 		modal.find(".modal-body input[name='name']").val(name);
 		modal.find(".modal-body select[name='theme']").val(theme);
 		modal.find(".modal-body select[name='device']").val(device);
 		modal.find(".modal-body select[name='status']").val(status);
 	});
+	
+	var options = {
+		dataType: "json",
+		success: function(data) {
+			alert(data);
+		},
+		fail: function(data) {
+			alert(data);
+		}
+	};
+	$("#editPluginForm").ajaxForm(options);
+	$("#editPluginForm").submit(function() {
+		$("#editPluginForm").ajaxSubmit();
+	});
+
+	
 </script>
 
 #parse("/WEB-INF/tpl/common/footer.vm")

@@ -17,7 +17,7 @@ import com.i9144.xpage.model.Channel;
 import com.i9144.xpage.service.ChannelService;
 
 @Controller
-@RequestMapping(value = "/channels/")
+@RequestMapping(value = "/channels")
 public class ChannelAction {
 	private static final Logger logger = Logger.getLogger(ChannelAction.class);
 	@Resource

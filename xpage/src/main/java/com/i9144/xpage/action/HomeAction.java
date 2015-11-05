@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeAction {
 	private static final Logger logger = Logger.getLogger(HomeAction.class);
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String list(HttpServletRequest request, HttpServletResponse response,
 			Model model){
 		//model.addAttribute("channelPageCountMap",channelPageCountMap);
