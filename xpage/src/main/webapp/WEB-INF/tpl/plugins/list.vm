@@ -185,7 +185,7 @@
 		var device = tr.data("device");
 		var status = tr.data("status");
 		var modal = $(this);
-		modal.find(".modal-content form").attr("action","plugins/" + id);
+		modal.find(".modal-content form").attr("action","plugins/" + id + ".json");
 		modal.find(".modal-body input[name='pluginId']").val(pluginId);
 		modal.find(".modal-body input[name='name']").val(name);
 		modal.find(".modal-body select[name='theme']").val(theme);
@@ -193,19 +193,26 @@
 		modal.find(".modal-body select[name='status']").val(status);
 	});
 	
-	var options = {
-		dataType: "json",
-		success: function(data) {
-			alert(data);
-		},
-		fail: function(data) {
-			alert(data);
-		}
-	};
-	$("#editPluginForm").ajaxForm(options);
 	$("#editPluginForm").submit(function() {
-		$("#editPluginForm").ajaxSubmit();
-	});
+			$(this).ajaxSubmit({
+				type: "post",
+				dataType: "json",
+				accepts: {
+       				 xml: "text/xml",
+        			json: "text/json"
+    			},
+    			 headers: { 
+       				 Accept : "text/json; charset=utf-8",
+    			},
+				success: function(data) {
+					alert(data);
+				},
+				error: function(data) {
+					alert(data);
+				}
+			});
+			return false;
+		});
 
 	
 </script>
