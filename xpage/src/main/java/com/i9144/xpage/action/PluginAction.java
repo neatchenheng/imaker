@@ -44,7 +44,7 @@ public class PluginAction {
 		return "/plugins/list";
 	}
 
-	@RequestMapping(value = "{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "{id}", method = RequestMethod.POST, produces="application/json")
 	public @ResponseBody int  update(Model model, @PathVariable("id") int id,
 			@ModelAttribute Plugin plugin) {
 		plugin.setId(id);

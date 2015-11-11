@@ -197,15 +197,9 @@
 			$(this).ajaxSubmit({
 				type: "post",
 				dataType: "json",
-				accepts: {
-       				 xml: "text/xml",
-        			json: "text/json"
-    			},
-    			 headers: { 
-       				 Accept : "text/json; charset=utf-8",
-    			},
 				success: function(data) {
-					alert(data);
+					$("#editPluginTemplate").modal("hide");
+					location.reload();
 				},
 				error: function(data) {
 					alert(data);
