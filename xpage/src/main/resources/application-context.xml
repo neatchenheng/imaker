@@ -11,6 +11,8 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.i9144.xpage" />
 	<aop:aspectj-autoproxy />
+	<mvc:annotation-driven />
+
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">

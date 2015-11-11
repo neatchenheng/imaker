@@ -46,7 +46,7 @@
     				<td>$!channel.name</td>
     				<td>$!channel.url</td>
 					<td>$!channel.editor</td>
-					<td><a href="../pages?cid=$channel.channelId">$!channel.pageCount</a></td>
+					<td><a href="pages?cid=$channel.channelId">$!channel.pageCount</a></td>
     				<td>#if($channel.status == 1) 正常 #else 关闭 #end</td>
     				<td><a href="#" data-toggle="modal" data-target="#editChannelTemplate">修改</a></td>
     			</tr>

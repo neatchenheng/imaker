@@ -276,15 +276,14 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.1.30</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
+			<artifactId>jackson-core-lgpl</artifactId>
 			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
+			<artifactId>jackson-mapper-lgpl</artifactId>
 			<version>1.5.4</version>
 		</dependency>
 		<dependency>

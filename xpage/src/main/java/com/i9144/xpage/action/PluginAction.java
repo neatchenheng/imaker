@@ -3,7 +3,6 @@ package com.i9144.xpage.action;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.i9144.xpage.exception.HelperException;
 import com.i9144.xpage.model.Plugin;
@@ -44,11 +44,11 @@ public class PluginAction {
 		return "/plugins/list";
 	}
 
-	@RequestMapping(value = "{id}", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@RequestMapping(value = "{id}", method = RequestMethod.POST)
 	public @ResponseBody int  update(Model model, @PathVariable("id") int id,
 			@ModelAttribute Plugin plugin) {
 		plugin.setId(id);
-		pluginService.update(plugin);
-		return "/plugins/list";
+		int result = pluginService.update(plugin);
+		return result;
 	}
 }
