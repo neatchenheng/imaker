@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.i9144.xpage.exception.HelperException;
 import com.i9144.xpage.model.Channel;
+import com.i9144.xpage.model.Plugin;
 import com.i9144.xpage.service.ChannelService;
 
 @Controller
@@ -44,12 +46,10 @@ public class ChannelAction {
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.POST)
-	public String update(Model model, @PathVariable("id") int id,
+	public @ResponseBody int update(Model model, @PathVariable("id") int id,
 			@ModelAttribute Channel channel) {
 		channel.setId(id);
-		channelService.update(channel);
-		List<Channel> channels = channelService.list();
-		model.addAttribute("channels", channels);
-		return "/channels/list";
+		int result = channelService.update(channel);
+		return result;
 	}
 }
