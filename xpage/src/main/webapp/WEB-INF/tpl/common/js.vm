@@ -1,6 +1,15 @@
+<!--
 <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="http://cdn.bootcss.com/jquery.form/3.51/jquery.form.min.js"></script>
+-->
+<script src="$request.contextPath/js/jquery.min.js"></script>
+<script src="$request.contextPath/js/bootstrap.min.js"></script>
+<script src="$request.contextPath/js/jquery.form.min.js"></script>
+<script src="$request.contextPath/js/jquery.loadTemplate-1.4.4.min.js"></script>
+<script src="$request.contextPath/js/jquery.formatDateTime.min.js"></script>
+<script src="$request.contextPath/js/common.js"></script>
 <script>
   var _hmt = _hmt || [];
+  window.CONTEXT_PATH = '$request.contextPath';
 </script>

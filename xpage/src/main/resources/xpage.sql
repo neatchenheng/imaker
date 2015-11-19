@@ -55,6 +55,20 @@ CREATE TABLE `tb_page` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `tb_module`;
+
+CREATE TABLE `tb_module` (
+  `id` int(11) NOT NULL auto_increment,
+  `page_id` int(11) NOT NULL,
+  `plugin_id` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL COMMENT '模块名称',
+  `status` tinyint(4) NOT NULL COMMENT '状态,{0:关闭,1:正常}',
+  `create_time` date NOT NULL,
+  `update_time` date NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 /*Data for the table `tb_page` */
 
 /*Table structure for table `tb_plugin` */

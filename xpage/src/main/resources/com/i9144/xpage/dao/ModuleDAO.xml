@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ModuleDAO">
+	<resultMap class="com.i9144.xpage.model.Module" id="module">
+		<result property="id" column="id"/>
+		<result property="pageId" column="page_id"/>
+		<result property="pluginId" column="plugin_id"/>
+		<result property="name" column="name"/>
+		<result property="pluginName" column="plugin_name"/>
+		<result property="status" column="status"/>
+		<result property="position" column="position"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<sql id="allFields">
+	   a.id, a.page_id, a.plugin_id, a.name, a.status, a.position, a.create_time, a.update_time
+	</sql>
+	<!-- Module -->
+	<insert id="add" parameterClass="com.i9144.xpage.model.Module">
+        INSERT INTO tb_module(page_id,plugin_id,name,status, position, create_time,update_time)
+        VALUES (#pageId#,#pluginId#,#name#,#status#,#position#, #createTime#,#updateTime#)
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT @@IDENTITY AS id
+        </selectKey>
+	</insert>
+
+	<delete id="delete" parameterClass="int">
+	    DELETE FROM tb_module WHERE id=#id#
+	</delete>
+	
+	<update id="update" parameterClass="com.i9144.xpage.model.Module">
+	    UPDATE tb_module
+	    SET name=#name#, status=#status#, update_time=#updateTime#
+	    WHERE id=#id#
+	</update>
+	
+	<select id="get" resultMap="module" parameterClass="int">
+	    SELECT <include refid="allFields"/>  FROM tb_module a WHERE id=#id#
+	</select>
+	
+	<select id="getByPageId" resultMap="module" parameterClass="int">
+	    SELECT <include refid="allFields"/>, b.name as plugin_name FROM tb_module a, tb_plugin b  WHERE a.page_id=#pageId# and a.plugin_id = b.plugin_id
+	</select>
+	
+	<select id="getMaxPosition" resultClass="int" parameterClass="map">
+	    SELECT MAX(position) from tb_module WHERE page_id = #pageId#
+	</select>
+</sqlMap>

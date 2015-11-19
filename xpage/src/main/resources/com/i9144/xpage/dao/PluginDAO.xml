@@ -4,45 +4,50 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="PluginDAO">
 	<resultMap class="com.i9144.xpage.model.Plugin" id="plugin">
-		<result property="id" column="id"/>
-		<result property="pluginId" column="plugin_id"/>
-		<result property="name" column="name"/>
-		<result property="theme" column="theme"/>
-		<result property="device" column="device"/>
-		<result property="status" column="status"/>
-		<result property="updateTime" column="update_time"/>
-		<result property="createTime" column="create_time"/>
+		<result property="id" column="id" />
+		<result property="pluginId" column="plugin_id" />
+		<result property="name" column="name" />
+		<result property="theme" column="theme" />
+		<result property="device" column="device" />
+		<result property="status" column="status" />
+		<result property="updateTime" column="update_time" />
+		<result property="createTime" column="create_time" />
 	</resultMap>
-	
+
 	<!-- Plugin -->
 	<insert id="add" parameterClass="com.i9144.xpage.model.Plugin">
-        INSERT INTO tb_plugin(plugin_id,name,theme,device,status,create_time,update_time)
-        VALUES (#pluginId#,#name#,#theme#,#device#,#status#,#createTime#,#updateTime#)
+		INSERT INTO
+		tb_plugin(plugin_id,name,theme,device,status,create_time,update_time)
+		VALUES
+		(#pluginId#,#name#,#theme#,#device#,#status#,#createTime#,#updateTime#)
+		<selectKey resultClass="int" keyProperty="id">
+			SELECT @@IDENTITY AS id
+		</selectKey>
 	</insert>
 
 	<delete id="delete" parameterClass="int">
-	    DELETE FROM tb_plugin WHERE id=#id#
+		DELETE FROM tb_plugin WHERE id=#id#
 	</delete>
-	
+
 	<update id="update" parameterClass="com.i9144.xpage.model.Plugin">
-	    UPDATE tb_plugin 
-	    SET name=#name#, status=#status#, update_time=#updateTime#
-	    WHERE id=#id#
+		UPDATE tb_plugin
+		SET name=#name#, status=#status#, update_time=#updateTime#
+		WHERE id=#id#
 	</update>
-	
-	<select id="list" resultMap="plugin" >
-	    SELECT * FROM tb_plugin ORDER BY update_time DESC
-	</select>		
-	
-	<select id="count" resultClass="int"  >
-	    SELECT count(id) FROM tb_plugin 
-	</select>	 
-	
-	<select id="get" resultMap="plugin" parameterClass="int">
-	    SELECT * FROM tb_plugin WHERE id=#id#
+
+	<select id="list" resultMap="plugin">
+		SELECT * FROM tb_plugin ORDER BY update_time DESC
 	</select>
-	
+
+	<select id="count" resultClass="int">
+		SELECT count(id) FROM tb_plugin
+	</select>
+
+	<select id="get" resultMap="plugin" parameterClass="int">
+		SELECT * FROM tb_plugin WHERE id=#id#
+	</select>
+
 	<select id="getByPluginId" resultMap="plugin" parameterClass="int">
-	    SELECT * FROM tb_plugin WHERE plugin_id=#pluginId#
+		SELECT * FROM tb_plugin WHERE plugin_id=#pluginId#
 	</select>
 </sqlMap>

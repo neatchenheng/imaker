@@ -5,9 +5,13 @@
 	<title>优酷直播CMS系统</title>
 	<meta name="description" content="优酷直播CMS系统">
 	<link rel="Shortcut Icon" href="http://static.youku.com/v1.0.1096/index/img/favicon.ico" type="image/x-icon"/>
+	<!--
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/main.css">
+	-->
+	<link rel="stylesheet" href="$request.contextPath/css/bootstrap.min.css">
+	<link rel="stylesheet" href="$request.contextPath/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="$request.contextPath/css/main.css">
 </head>
 
 <body>
@@ -21,15 +25,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="home" class="navbar-brand">优酷直播CMS</a>
+      <a href="$request.contextPath/channels" class="navbar-brand">优酷直播CMS</a>
     </div>
     <nav id="bs-navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class="active">
-          <a href="channels" onclick="_hmt.push(['_trackEvent', 'docv3-navbar', 'click', '导航-频道管理'])">频道管理</a>
+          <a href="$request.contextPath/channels" onclick="_hmt.push(['_trackEvent', 'docv3-navbar', 'click', '导航-频道管理'])">频道管理</a>
         </li>
         <li>
-          <a href="plugins" onclick="_hmt.push(['_trackEvent', 'docv3-navbar', 'click', '导航-插件管理'])">插件管理</a>
+          <a href="$request.contextPath/plugins" onclick="_hmt.push(['_trackEvent', 'docv3-navbar', 'click', '导航-插件管理'])">插件管理</a>
         </li>
         <li>
           <a href="" onclick="_hmt.push(['_trackEvent', 'docv3-navbar', 'click', '导航-用户管理'])">用户管理</a>

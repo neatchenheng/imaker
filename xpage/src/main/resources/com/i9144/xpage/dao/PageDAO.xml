@@ -5,6 +5,7 @@
 <sqlMap namespace="PageDAO">
 	<resultMap class="com.i9144.xpage.model.Page" id="page">
 		<result property="id" column="id"/>
+		<result property="channelId" column="channel_id"/>
 		<result property="name" column="name"/>
 		<result property="title" column="title"/>
 		<result property="metaKeywords" column="meta_keywords"/>
@@ -20,6 +21,9 @@
 	<insert id="add" parameterClass="com.i9144.xpage.model.Page">
         INSERT INTO tb_page(channel_id,name,title,meta_keywords,meta_desc,url,editor,status,create_time,update_time)
         VALUES (#channelId#,#name#,#title#,#metaKeywords#,#metaDesc#,#url#,#editor#,#status#,#createTime#,#updateTime#)
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT @@IDENTITY AS id
+        </selectKey>
 	</insert>
 
 	<delete id="delete" parameterClass="int">

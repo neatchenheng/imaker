@@ -2,8 +2,8 @@
 
 <div class="bs-docs-header" id="content" tabindex="-1">
 	<div class="container">
-		<h1>频道管理</h1>
-		<p>共有$!pages.size()个频道</p>
+		<h1>频道页面管理</h1>
+		<p>共有$!pages.size()个页面</p>
 		<div class="btn-group" role="group">
 			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addPageTemplate">
 				新建
@@ -24,11 +24,11 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>名称</th>
-				<th>地址</th>
+				<th>页头标题</th>
+				<th>页面名称</th>
+				<th>页面关键字</th>
+				<th>页面描述</th>
 				<th>编辑邮箱</th>
-				<th>页面数</th>
 				<th>状态</th>
 				<th>操作</th>
 			</tr>
@@ -37,16 +37,18 @@
 			#foreach($page in $pages)
     			<tr 
     				data-id="$page.id" 
-					data-channel_id="$page.channelId" 
+    				data-channel_id="$page.channelId"
     				data-name="$!page.name"
-					data-url="$page.url"
-					data-editor="$page.editor"
+    				data-title="$!page.title"
+    				data-meta_keywords="$!page.metaKeywords"
+					data-meta_desc="$page.metaDesc"
+					data-editor ="$!page.editor"
 					data-status="$page.status">
-    				<td>$page.pageId</td>
-    				<td>$!page.name</td>
-    				<td>$!page.url</td>
+    				<td>$!page.title</td>
+    				<td><a href="$request.contextPath/pages/$page.id" target="_blank">$!page.name</a></td>
+					<td>$!page.metaKeywords</td>
+					<td>$!page.metaDesc</td>
 					<td>$!page.editor</td>
-					<td><a href="../pages?cid=$page.pageId">$!page.pageCount</a></td>
     				<td>#if($page.status == 1) 正常 #else 关闭 #end</td>
     				<td><a href="#" data-toggle="modal" data-target="#editPageTemplate">修改</a></td>
     			</tr>
@@ -63,30 +65,36 @@
         		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
         			<span aria-hidden="true">&times;</span>
         		</button>
-        		<h4 class="modal-title">新频道</h4>
+        		<h4 class="modal-title">新页面</h4>
        		</div>
         	<form class="form-horizontal" method="post" action="pages">
        		<div class="modal-body">
-    			<div class="form-group">
-					<label for="pageId" class="col-sm-2 control-label">ID:</label>
+				<div class="form-group">
+					<label for="name" class="col-sm-2 control-label">页面标题:</label>
 					<div class="col-sm-10">
-  						<input type="text" class="form-control" id="pageId" name="pageId" placeholder="ID:" required>
+  						<input type="text" class="form-control" id="name" name="name" placeholder="显示在浏览器上的小标题" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="name" class="col-sm-2 control-label">名称:</label>
+					<label for="title" class="col-sm-2 control-label">页面名称:</label>
 					<div class="col-sm-10">
-  						<input type="text" class="form-control" id="name" name="name" placeholder="名称:" required>
+  						<input type="text" class="form-control" id="title" name="title" placeholder="页面名称，管理页面时显示" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="url" class="col-sm-2 control-label">频道地址:</label>
+					<label for="metaKeywords" class="col-sm-2 control-label">关键字:</label>
 					<div class="col-sm-10">
-  						<input type="url" class="form-control" id="url" name="url" placeholder="频道地址:" required>
+  						<input type="text" class="form-control" id="metaKeywords" name="metaKeywords" placeholder="页面关键字:" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="editor" class="col-sm-2 control-label">编辑邮箱:</label>
+					<label for="metaDesc" class="col-sm-2 control-label">页面描述:</label>
+					<div class="col-sm-10">
+  						<input type="text" class="form-control" id="metaDesc" name="metaDesc" placeholder="页面描述:" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="editor" class="col-sm-2 control-label">编辑邮箱</label>
 					<div class="col-sm-10">
   						<input type="email" class="form-control" id="editor" name="editor" placeholder="编辑邮箱:" required>
 					</div>
@@ -118,26 +126,32 @@
         		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
         			<span aria-hidden="true">&times;</span>
         		</button>
-        		<h4 class="modal-title">编辑频道</h4>
+        		<h4 class="modal-title">编辑页面</h4>
        		</div>
-        	<form class="form-horizontal" method="post">
+        	<form class="form-horizontal" method="post" id="editPageForm">
        		<div class="modal-body">
-    			<div class="form-group">
-					<label for="pageId" class="col-sm-2 control-label">ID:</label>
+				<div class="form-group">
+					<label for="name" class="col-sm-2 control-label">页面标题:</label>
 					<div class="col-sm-10">
-  						<input type="text" class="form-control" id="pageId" name="pageId" disabled>
+  						<input type="text" class="form-control" id="name" name="name" placeholder="显示在浏览器上的小标题" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="name" class="col-sm-2 control-label">名称:</label>
+					<label for="title" class="col-sm-2 control-label">页面名称:</label>
 					<div class="col-sm-10">
-  						<input type="text" class="form-control" id="name" name="name" placeholder="名称:" required>
+  						<input type="text" class="form-control" id="title" name="title" placeholder="页面名称，管理页面时显示" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="url" class="col-sm-2 control-label">频道地址:</label>
+					<label for="metaKeywords" class="col-sm-2 control-label">关键字:</label>
 					<div class="col-sm-10">
-  						<input type="url" class="form-control" id="url" name="url" placeholder="频道地址:" required>
+  						<input type="text" class="form-control" id="metaKeywords" name="metaKeywords" placeholder="页面关键字:" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="metaDesc" class="col-sm-2 control-label">页面描述:</label>
+					<div class="col-sm-10">
+  						<input type="text" class="form-control" id="metaDesc" name="metaDesc" placeholder="页面描述:" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -169,19 +183,38 @@
 	$("#editPageTemplate").on("show.bs.modal",function(event) {
 		var tr = $(event.relatedTarget).closest('tr');
 		var id = tr.data("id");
-		var pageId = tr.data("page_id");
+		var channelId = tr.data("channel_id");
 		var name = tr.data("name");
-		var url = tr.data("url");
+		var title= tr.data("title");
+		var keywords = tr.data("meta_keywords");
+		var desc = tr.data("meta_desc");
 		var editor = tr.data("editor");
 		var status = tr.data("status");
 		var modal = $(this);
-		modal.find(".modal-content form").attr("action","pages/" + id);
-		modal.find(".modal-body input[name='pageId']").val(pageId);
+		modal.find(".modal-content form").attr("action", "pages/" + id);
 		modal.find(".modal-body input[name='name']").val(name);
-		modal.find(".modal-body input[name='url']").val(url);
+		modal.find(".modal-body input[name='title']").val(title);
+		modal.find(".modal-body input[name='metaKeywords']").val(keywords);
+		modal.find(".modal-body input[name='metaDesc']").val(desc);
 		modal.find(".modal-body input[name='editor']").val(editor);
 		modal.find(".modal-body select[name='status']").val(status);
 	});
+	
+	
+	$("#editPageForm").submit(function() {
+			$(this).ajaxSubmit({
+				type: "post",
+				dataType: "json",
+				success: function(data) {
+					$("#editPageTemplate").modal("hide");
+					location.reload();
+				},
+				error: function(data) {
+					alert(data);
+				}
+			});
+			return false;
+		});
 </script>
 
 #parse("/WEB-INF/tpl/common/footer.vm")

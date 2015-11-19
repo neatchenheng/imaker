@@ -18,6 +18,9 @@
 	<insert id="add" parameterClass="com.i9144.xpage.model.Channel">
         INSERT INTO tb_channel(channel_id,name,url,editor,status,create_time,update_time)
         VALUES (#channelId#,#name#,#url#,#editor#,#status#,#createTime#,#updateTime#)
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT @@IDENTITY AS id
+        </selectKey>
 	</insert>
 
 	<delete id="delete" parameterClass="int">

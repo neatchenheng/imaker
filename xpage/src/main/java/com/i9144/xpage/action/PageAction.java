@@ -1,40 +1,40 @@
 package com.i9144.xpage.action;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.apache.velocity.tools.generic.DateTool;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.i9144.xpage.exception.HelperException;
 import com.i9144.xpage.model.Page;
 import com.i9144.xpage.service.PageService;
 
 @Controller
-@RequestMapping(value = "/pages")
 public class PageAction {
 	private static final Logger logger = Logger.getLogger(PageAction.class);
 	@Resource
 	private PageService pageService;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String list(Model model,
-			@RequestParam(value = "cid", required = true) int channelId) {
+	@RequestMapping(value = "channels/{channelId}/pages", method = RequestMethod.GET)
+	public String list(Model model, @PathVariable("channelId") int channelId) {
 		List<Page> pages = pageService.listByChannelId(channelId);
 		model.addAttribute("pages", pages);
 		return "/pages/list";
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "channels/{channelId}/pages", method = RequestMethod.POST)
 	public String save(Model model, @ModelAttribute Page page,
-			@RequestParam(value = "cid", required = true) int channelId) {
+			@PathVariable("channelId") int channelId) {
 		try {
 			page.setChannelId(channelId);
 			pageService.add(page);
@@ -47,14 +47,20 @@ public class PageAction {
 		return "/pages/list";
 	}
 
-	@RequestMapping(value = "{id}", method = RequestMethod.POST)
-	public String update(Model model, @PathVariable("id") int id,
-			@ModelAttribute Page page,
-			@RequestParam(value = "cid", required = true) int channelId) {
+	@RequestMapping(value = "channels/{channelId}/pages/{id}", method = RequestMethod.POST)
+	public @ResponseBody
+	int update(Model model, @PathVariable("channelId") int channelId,
+			@PathVariable("id") int id, @ModelAttribute Page page) {
 		page.setId(id);
-		pageService.update(page);
-		List<Page> pages = pageService.listByChannelId(channelId);
-		model.addAttribute("pages", pages);
-		return "/pages/list";
+		int result = pageService.update(page);
+		return result;
+	}
+	
+	@RequestMapping(value="pages/{pageId}", method = RequestMethod.GET)
+	public String get(Model model, @PathVariable("pageId") int pageId) {
+		Map<String, Object> map = pageService.get(pageId);
+		model.addAttribute("date", new DateTool());  
+		model.addAttribute("map", map);
+		return "pages/get";
 	}
 }

@@ -1,6 +1,7 @@
 package com.i9144.xpage.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -26,25 +27,34 @@ public abstract class AbstractDAO<T> {
 	public T get(int id) {
 		return (T) sqlMapClient.queryForObject(daoName + ".get", id);
 	}
-	
+
 	public int update(T t) {
 		return sqlMapClient.update(daoName + ".update", t);
 	}
-	
+
 	public int delete(int id) {
 		return sqlMapClient.delete(daoName + ".delete", id);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<T> list() {
 		return sqlMapClient.queryForList(daoName + ".list");
 	}
-	
+
 	public int count() {
 		return (Integer) sqlMapClient.queryForObject(daoName + ".count");
 	}
 
 	public SqlMapClientTemplate getSqlMapClient() {
 		return sqlMapClient;
+	}
+
+	public int getMaxPosition(Map<String, Object> params) {
+		Integer pos = (Integer) sqlMapClient.queryForObject(daoName
+				+ ".getMaxPosition", params);
+		if (pos == null) {
+			return 0;
+		}
+		return pos;
 	}
 }

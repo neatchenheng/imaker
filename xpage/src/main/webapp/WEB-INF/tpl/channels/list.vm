@@ -43,10 +43,10 @@
 					data-editor="$channel.editor"
 					data-status="$channel.status">
     				<td>$channel.channelId</td>
-    				<td>$!channel.name</td>
+    				<td><a href="channels/$channel.channelId/pages">$!channel.name</a></td>
     				<td>$!channel.url</td>
 					<td>$!channel.editor</td>
-					<td><a href="pages?cid=$channel.channelId">$!channel.pageCount</a></td>
+					<td><a href="channels/$channel.channelId/pages">$!channel.pageCount</a></td>
     				<td>#if($channel.status == 1) 正常 #else 关闭 #end</td>
     				<td><a href="#" data-toggle="modal" data-target="#editChannelTemplate">修改</a></td>
     			</tr>
