@@ -9,22 +9,30 @@ $.addTemplateFormatter({
 	}
 });
 
-$('a[data-toggle="tab"]').on(
-		'shown.bs.tab',
-		function(e) {
-			var ul = $(e.target).closest("ul");
-			var pageId = ul.data("page_id");
-			var target = $(e.target).attr("href");
-			if (target == "#plugin_manage") {
-				$.getJSON(CONTEXT_PATH + "/pages/" + pageId + "/modules",
-						function(data) {
-							$("#modules_table tbody").loadTemplate(
-									CONTEXT_PATH + "/templates/modules.html",
-									data);
-						});
-			}
-			;
-		});
+$("#addModuleForm").submit(function() { 
+	$(this).ajaxSubmit({
+		type: "post",
+		dataType: "json",
+		success: function(data) {
+			$("#addModuleTemplate").modal("hide");
+			var pageId = $("#pageId").val();
+			fillModuleTable(pageId);
+		},
+		error: function(data) {
+			alert(data);
+		}
+	});
+	return false;
+});
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+	var ul = $(e.target).closest("ul");
+	var pageId = ul.data("page_id");
+	var target = $(e.target).attr("href");
+	if (target == "#plugin_manage") {
+		fillModuleTable(pageId);
+	}
+});
 
 $("#editModuleTemplate").on(
 		"show.bs.modal",
@@ -45,53 +53,46 @@ $("#editModuleTemplate").on(
 			modal.find(".modal-body select[name='status']").val(status);
 		});
 
-$("#editModuleForm").submit(
-		function() {
-			$(this).ajaxSubmit(
-					{
-						type : "post",
-						dataType : "json",
-						success : function(data) {
-							$("#editModuleTemplate").modal("hide");
-							var pageId = $("#pageId").val();
-							$.getJSON(CONTEXT_PATH + "/pages/" + pageId
-									+ "/modules", function(data) {
-								$("#modules_table tbody").loadTemplate(
-										CONTEXT_PATH
-												+ "/templates/modules.html",
-										data);
-							});
-						},
-						error : function(data) {
-							alert(data);
-						}
-					});
-			return false;
-		});
-
-
-function deleteModule() {
-	var tr = $(this).closest('tr');
-	var id = tr.data("id");
-	var pageId = tr.data("page_id");
-	jQuery.ajax({
-		url : pageId + "/modules/" + id,
-		type : "DELETE",
+$("#editModuleForm").submit(function() {
+	$(this).ajaxSubmit({
+		type : "post",
+		dataType : "json",
 		success : function(data) {
-			$.getJSON(CONTEXT_PATH + "/pages/" + pageId + "/modules",
-					function(data) {
-						$("#modules_table tbody").loadTemplate(
-								CONTEXT_PATH
-										+ "/templates/modules.html",
-								data);
-					});
+			$("#editModuleTemplate").modal("hide");
+			var pageId = $("#pageId").val();
+			fillModuleTable(pageId);
+		},
+		error : function(data) {
+			alert(data);
 		}
+	});
+	return false;
+});
+
+function fillModuleTable(pageId) {
+	$.getJSON(CONTEXT_PATH + "/pages/" + pageId + "/modules", function(data) {
+		$("#modules_table tbody").loadTemplate(
+				CONTEXT_PATH + "/templates/modules.html", data, {
+					success : deleteModuleCallback
+				});
 	});
 }
 
-
-$(".deleteModuleLink").bind(
-		"click",
-		function(event) {
-			
+function deleteModuleCallback() {
+	$(".deleteModuleLink").bind("click", function(event) {
+		var result = confirm("确认删除吗？");
+		if (! result) {
+			return;
+		}
+		var tr = $(event.target).closest('tr');
+		var id = tr.data("id");
+		var pageId = tr.data("page_id");
+		jQuery.ajax({
+			url : pageId + "/modules/" + id,
+			type : "DELETE",
+			success : function(data) {
+				fillModuleTable(pageId);
+			}
 		});
+	});
+}

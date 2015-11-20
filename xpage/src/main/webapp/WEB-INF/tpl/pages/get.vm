@@ -70,7 +70,6 @@
   						<input type="text" class="form-control" id="name" name="name" placeholder="模块名称" required>
 					</div>
 				</div>
-				
 				<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">选择插件:</label>
 					<div class="col-sm-10">
@@ -81,7 +80,6 @@
 						</select>
 					</div>
 				</div>
-			
 				<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">状态:</label>
 					<div class="col-sm-10">
@@ -120,7 +118,6 @@
   						<input type="text" class="form-control" id="name" name="name" placeholder="模块标题" required>
 					</div>
 				</div>
-				
 			<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">选择插件:</label>
 					<div class="col-sm-10">
@@ -131,7 +128,6 @@
 						</select>
 					</div>
 				</div>
-			
 				<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">状态:</label>
 					<div class="col-sm-10">
@@ -148,26 +144,13 @@
         		<!--<button type="button" class="btn btn-danger">删除</button>-->
       		</div>
       		</form>
-      	</div>启用 
+      	</div>
 	</div>
 </div>
+
 #parse("/WEB-INF/tpl/common/js.vm")
-<script src="$request.contextPath/js/pages.js"/>
-<script>
-	$("#addModuleForm").submit(function() { 
-			$(this).ajaxSubmit({
-				type: "post",
-				dataType: "json",
-				success: function(data) {
-					$("#addModuleTemplate").modal("hide");
-					location.reload();
-				},
-				error: function(data) {
-					alert(data);
-				}
-			});
-			return false;
-		});
+
+<script src="$request.contextPath/js/pages.js">
 </script>
 
 #parse("/WEB-INF/tpl/common/footer.vm")
