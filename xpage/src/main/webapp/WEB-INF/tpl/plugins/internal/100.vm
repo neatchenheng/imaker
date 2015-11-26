@@ -1,0 +1,10 @@
+<div class="panel-body">
+	<div class="row-header">
+		<span class="label label-info">图文管理</span>
+	</div>
+	<div class="row-content">
+		<ul class="list-inline">
+			<li><span class="add-btn">+</span></li>
+		</ul>
+	</div>
+</div>

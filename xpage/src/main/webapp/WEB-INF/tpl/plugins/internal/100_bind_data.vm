@@ -1,0 +1,47 @@
+<!-- 绑定数据 -->
+<div class="modal fade" id="bindData100Template" style="display:none">
+	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        			<span aria-hidden="true">&times;</span>
+        		</button>
+        		<h4 class="modal-title">图文数据</h4>
+       		</div>
+        	<form class="form-horizontal" method="post" action="" id="bindData100Form">
+       		<div class="modal-body">
+				<div class="form-group">
+					<label for="title" class="col-sm-2 control-label">标题:</label>
+					<div class="col-sm-10">
+  						<input type="text" class="form-control" id="title" name="title" placeholder="标题" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="url" class="col-sm-2 control-label">目标链接:</label>
+					<div class="col-sm-10">
+  						<input type="url" class="form-control" id="url" name="url" placeholder="目标链接" required>
+						<select class="form-control" name="pluginId">
+						#foreach($plugin in $map.plugins)
+							<option value="$plugin.pluginId">$plugin.name</option>
+						#end
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="status" class="col-sm-2 control-label">状态:</label>
+					<div class="col-sm-10">
+						<select class="form-control" name="status">
+							<option value="0">关闭</option>
+							<option value="1">开启</option>
+						</select>
+					</div>
+				</div>
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        		<button type="submit" class="btn btn-primary">保存</button>
+      		</div>
+      		</form>
+      	</div>
+	</div>
+</div>

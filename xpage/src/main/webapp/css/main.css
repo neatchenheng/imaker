@@ -16,3 +16,32 @@
 .bs-docs-nav {
 	margin-bottom: 0px;
 } 
+
+.add-btn {
+	display: block;
+	width: 160px;
+	height: 160px;
+	font-size: 160px;
+	line-height: 160px;
+	font-weight: 700;
+	text-align: center;
+	cursor: pointer;
+}
+
+.row-header  {
+	border-bottom: 1px solid #3A87AD;
+	width: 300px;
+	overflow: hidden;
+}
+
+.row-content {
+	margin: 10px 0 30px 0;
+}
+
+.row-header .label {
+	border-radius: 3px 3px 0 0;
+}
+
+.label-info {
+	background-color: #3a87ad;
+}
