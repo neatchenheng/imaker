@@ -13,7 +13,7 @@
 
 	<mvc:annotation-driven />
 	<context:annotation-config />
-	<context:component-scan base-package="com.i9144.xapi" />
+	<context:component-scan base-package="com.i9144.xint" />
 	<aop:aspectj-autoproxy />
 
 	<bean id="propertyConfigurer"
@@ -47,4 +47,32 @@
 			</bean>
 		</property>
 	</bean> -->
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="suffix" value=".vm" />
+		<property name="prefix" value="WEB-INF/tpl/" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="exposeRequestAttributes" value="true" />
+		<!--toolbox配置文件路径 -->
+		<property name="toolboxConfigLocation" value="WEB-INF/classes/toolbox.xml" />
+	</bean>
+	
+	<bean id="velocityConfig"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="" />
+		<property name="configLocation" value="classpath:velocity.properties" />
+	</bean>
+	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- set the max upload size100MB -->
+		<property name="maxUploadSize">
+			<value>104857600</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+	
 </beans>
