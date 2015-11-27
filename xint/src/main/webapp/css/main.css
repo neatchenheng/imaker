@@ -1,0 +1,47 @@
+.bs-docs-header {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-bottom: 40px;
+    font-size: 24px;
+    text-align: left;
+    position: relative;
+    padding: 30px 0;
+    color: #cdbfe3;
+    text-shadow: 0 1px 0 rgba(0,0,0,.1);
+    background-color: #6f5499;
+    background-image: linear-gradient(to bottom,#563d7c 0,#6f5499 100%);
+    background-repeat: repeat-x;
+}
+
+.bs-docs-nav {
+	margin-bottom: 0px;
+} 
+
+.add-btn {
+	display: block;
+	width: 160px;
+	height: 160px;
+	font-size: 160px;
+	line-height: 160px;
+	font-weight: 700;
+	text-align: center;
+	cursor: pointer;
+}
+
+.row-header  {
+	border-bottom: 1px solid #3A87AD;
+	width: 300px;
+	overflow: hidden;
+}
+
+.row-content {
+	margin: 10px 0 30px 0;
+}
+
+.row-header .label {
+	border-radius: 3px 3px 0 0;
+}
+
+.label-info {
+	background-color: #3a87ad;
+}

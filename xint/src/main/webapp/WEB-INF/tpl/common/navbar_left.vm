@@ -1,0 +1,14 @@
+<ul class="nav nav-list">
+	<li class="active">
+		<a href="#" class="dropdown-toggle">
+			<i class="icon-coffee"></i> <span class="menu-text">商品</span> <b class="arrow icon-angle-down"></b>
+		</a>
+		<ul class="submenu">
+			<li>
+				<a href="#">
+					<i class="icon-double-angle-right"></i> 商品管理
+				</a>
+			</li>
+		</ul>
+	</li>
+</ul>

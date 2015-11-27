@@ -1,0 +1,96 @@
+<div class="navbar-container" id="navbar-container">
+	<div class="navbar-header pull-left">
+		<a href="#" class="navbar-brand">
+			<small>
+				<i class="icon-leaf"></i>
+				Xint 
+			</small>
+		</a><!-- /.brand -->
+	</div><!-- /.navbar-header -->
+
+	<div class="navbar-header pull-right" role="navigation">
+		<ul class="nav ace-nav">
+			<li class="grey">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+					<i class="icon-tasks"></i>
+					<span class="badge badge-grey">1</span>
+				</a>
+
+				<ul class="pull-right dropdown-navbar dropdown-menu dropdoNwn-caret dropdown-close">
+					<li class="dropdown-header">
+						<i class="icon-ok"></i>
+						 1个任务
+					</li>
+					<li>
+						<a href="#">
+							<div class="clearfix">
+								<span class="pull-left">样例任务</span>
+								<span class="pull-right">65%</span>
+							</div>
+							<div class="progress progress-mini ">
+								<div style="width:65%" class="progress-bar "></div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							任务详细
+							<i class="icon-arrow-right"></i>
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="purple">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+					<i class="icon-bell-alt icon-animated-bell"></i>
+					<span class="badge badge-important">1</span>
+				</a>
+
+				<ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+					<li class="dropdown-header">
+						<i class="icon-warning-sign"></i>
+						1个通知
+					</li>
+					<li>
+						<a href="#">
+							<div class="clearfix">
+								<span class="pull-left">
+									<i class="btn btn-xs no-hover btn-pink icon-comment"></i>
+									新订单
+								</span>
+								<span class="pull-right badge badge-info">+1</span>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							所有通知
+							<i class="icon-arrow-right"></i>
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="light-blue">
+				<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+					<img class="nav-user-photo" src="$request.contextPath/static/ace/assets/avatars/user.jpg" alt="Henry's Photo" />
+					<span class="user-info">
+						<small>Welcome,</small>							
+						Henry
+					</span>
+
+					<i class="icon-caret-down"></i>
+				</a>
+				<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+					<li>
+						<a href="$request.contextPath/v1/logout">
+							<i class="icon-off"></i>
+							退出
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul><!-- /.ace-nav -->
+	</div><!-- /.navbar-header -->
+</div><!-- /.container -->

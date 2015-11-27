@@ -50,7 +50,7 @@
 												请输入你的信息
 											</h4>
 											<div class="space-6"></div>
-											<form action="$request.contextPath/login" method="POST" id="login_form">
+											<form action="$request.contextPath/v1/login" method="POST" id="login_form">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">

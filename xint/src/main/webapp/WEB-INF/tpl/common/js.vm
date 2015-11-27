@@ -1,14 +1,41 @@
-<!--
-<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="http://cdn.bootcss.com/jquery.form/3.51/jquery.form.min.js"></script>
--->
-<script src="$request.contextPath/js/jquery.min.js"></script>
-<script src="$request.contextPath/js/bootstrap.min.js"></script>
+<!--[if !IE]> -->
+<script src="$request.contextPath/static/ace/assets/js/jquery-2.0.3.min.js"></script>
+<!-- <![endif]-->
+<!--[if IE]>
+<script src="<script src='$request.contextPath/static/ace/assets/js/jquery-1.10.2.min.js"></script>
+<![endif]--> 
+<!--[if !IE]> -->
+ <script type="text/javascript">
+	 window.jQuery || document.write("<script src='$request.contextPath/static/ace/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+ </script>
+ <!-- <![endif]-->
+ <!--[if IE]>
+<script type="text/javascript">
+ 	window.jQuery || document.write("<script src='$request.contextPath/static/ace/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+<script type="text/javascript">
+	if("ontouchend" in document) document.write("<script src='$request.contextPath/static/ace/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+ <script src="$request.contextPath/static/ace/assets/js/bootstrap.min.js"></script>
+ <script src="$request.contextPath/static/ace/assets/js/typeahead-bs2.min.js"></script>
+<script src="$request.contextPath/static/ace/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+<script src="$request.contextPath/static/ace/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+<script src="$request.contextPath/static/ace/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+ <script src="$request.contextPath/static/ace/assets/js/ace-elements.min.js"></script>
+ <script src="$request.contextPath/static/ace/assets/js/ace.min.js"></script>
+<script src="$request.contextPath/static/ace/assets/js/ace-extra.min.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="$request.contextPath/static/ace/assets/js/html5shiv.js"></script>
+<script src="$request.contextPath/static/ace/assets/js/respond.min.js"></script>
+<![endif]-->
+
 <script src="$request.contextPath/js/jquery.form.min.js"></script>
 <script src="$request.contextPath/js/jquery.loadTemplate-1.4.4.min.js"></script>
 <script src="$request.contextPath/js/jquery.formatDateTime.min.js"></script>
 <script src="$request.contextPath/js/common.js"></script>
+
 <script>
   window.CONTEXT_PATH = '$request.contextPath';
 </script>

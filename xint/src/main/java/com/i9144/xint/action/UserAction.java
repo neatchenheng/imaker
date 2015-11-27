@@ -18,6 +18,7 @@ import com.i9144.xint.util.CookieUtil;
 import com.i9144.xint.util.SystemUtil;
 
 @Controller
+@RequestMapping(value="/v1")
 public class UserAction {
 	private static final Logger logger = Logger.getLogger(UserAction.class);
 
@@ -57,7 +58,7 @@ public class UserAction {
 			HttpServletResponse response) {
 		if (StringUtils.isBlank(targetUrl)) {
 			targetUrl = new StringBuilder(SystemUtil.getProperty("envUrl"))
-					.append("/index").toString();
+					.append("/v1/index").toString();
 		}
 		try {
 			response.sendRedirect(targetUrl);

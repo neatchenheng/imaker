@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 
-	<display-name>imaker xapi</display-name>
+	<display-name>imaker xint</display-name>
 
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -22,6 +22,15 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<filter>
+	    <filter-name>authFilter</filter-name>
+	    <filter-class>com.i9144.xint.action.AuthFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>authFilter</filter-name>
+	    <url-pattern>/v1/*</url-pattern>
+	</filter-mapping>
 
 	<!-- Spring 刷新Introspector防止内存泄露 -->
 	<listener>
@@ -31,7 +40,7 @@
 	</listener>
 
 	<servlet>
-		<servlet-name>xapi</servlet-name>
+		<servlet-name>xint</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -40,7 +49,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>xapi</servlet-name>
+		<servlet-name>xint</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -54,6 +63,10 @@
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
@@ -73,7 +86,7 @@
 	</context-param>
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>xapi</param-value>
+		<param-value>xint</param-value>
 	</context-param>
 
 	<!-- <welcome-file-list>
