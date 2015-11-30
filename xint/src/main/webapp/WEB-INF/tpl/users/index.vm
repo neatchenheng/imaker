@@ -18,7 +18,7 @@
     					<i class="icon-home home-icon"></i>
     					<a href="$request.contextPath/v1/index">首页</a>
     				</li>
-    				<li class="active">Welcome</li>
+    				<li class="active">用户列表</li>
     			</ul><!-- .breadcrumb -->
     		</div>
 			<div class="page-content">
@@ -26,14 +26,8 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<!-- PAGE CONTENT BEGINS -->
-
-					<div class="alert alert-info">
-						<i class="icon-hand-right"></i>									 
-						欢迎回来：<strong>Henry</strong>
-						<button class="close" data-dismiss="alert">
-							<i class="icon-remove"></i>
-						</button>
-					</div>
+					<table id="users_table"></table>
+					<div id="users_pagination" style="height: auto;"></div>
 					<!-- PAGE CONTENT ENDS -->
 				</div><!-- /.col -->
 			</div><!-- /.row -->
@@ -47,4 +41,41 @@
 </div><!-- /.main-container -->	
 
 #parse("/WEB-INF/tpl/common/js.vm")
+
+<script>
+jQuery(function($) {
+		jQuery("#users_table").jqGrid({
+			url: "$request.contextPath/v1/users.json",
+			datatype: "json",
+			height: "auto",
+			width: "auto",
+			autowidth: true,
+			shrinkToFit: true,
+			colNames: [ '操作', '用户ID','昵称', '手机', 'E-mail', '创建时间'],
+			colModel: [
+				{name: 'action', index:'action', formatter : 
+					function(cellvalue, options, rowdata) {
+						id = rowdata.id;
+						return "N/A";
+					}
+				},
+				{name: 'id', index:'id'},
+				{name: 'name', index:'name'},
+				{name: 'phone', index:'phone'},
+				{name: 'email', index:'email'},
+				{name: 'createTime', index:'createTime', formatter:function(cellvalue, options, rowdata){ 
+					return jQuery.formatDateTime('yy-mm-dd hh:ii:ss', new Date(rowdata.createTime));
+				}},
+			],
+			viewrecords: true,
+			caption: '用户列表',
+			multiselect: true,
+			multiboxonly : true,
+			pager: "#users_pagination",
+			altRows: true
+		});
+	});
+
+</script>
+
 #parse("/WEB-INF/tpl/common/footer.vm")

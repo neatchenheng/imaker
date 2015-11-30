@@ -1,5 +1,6 @@
 package com.i9144.xint.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,8 +38,11 @@ public abstract class AbstractDAO<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> list() {
-		return sqlMapClient.queryForList(daoName + ".list");
+	public List<T> list(int offset, int rows) {
+		Map<String, Integer> params = new HashMap<String, Integer>();
+		params.put("offset", offset);
+		params.put("rows", rows);
+		return sqlMapClient.queryForList(daoName + ".list", params);
 	}
 
 	public int count() {

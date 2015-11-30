@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
 
 <sqlMapConfig>
-	<settings useStatementNamespaces="true"  enhancementEnabled="true" 
-		errorTracingEnabled="true" lazyLoadingEnabled="false"/>
-	<!-- <sqlMap resource="sqlmap/ExampleDAO.xml"/> -->
+	<settings useStatementNamespaces="true" enhancementEnabled="true"
+		errorTracingEnabled="true" lazyLoadingEnabled="false" />
+	<sqlMap resource="sqlmap/UserDAO.xml" />
 </sqlMapConfig>

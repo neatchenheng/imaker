@@ -1,7 +1,11 @@
 package com.i9144.xint.action;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,15 +16,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.i9144.xint.model.User;
+import com.i9144.xint.service.UserService;
 import com.i9144.xint.util.CookieUtil;
 import com.i9144.xint.util.SystemUtil;
 
 @Controller
-@RequestMapping(value="/v1")
+@RequestMapping(value = "/v1")
 public class UserAction {
 	private static final Logger logger = Logger.getLogger(UserAction.class);
+
+	@Resource
+	UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String toLogin() {
@@ -72,5 +82,24 @@ public class UserAction {
 			HttpServletResponse response) {
 		CookieUtil.cleanCookies(request, response);
 		return "login";
+	}
+
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public String usersHome() {
+		return "users/index";
+	}
+
+	@RequestMapping(value = "/users.json", method = RequestMethod.GET)
+	public @ResponseBody
+	Map<String, Object> listUsers(@RequestParam int page,
+			@RequestParam int rows, @RequestParam String sord,
+			@RequestParam String sidx) {
+		List<User> users = userService.list(page, rows, sord, sidx);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rows", users);
+		map.put("records", 100);
+		map.put("page", page);
+		map.put("total", 10);
+		return map;
 	}
 }

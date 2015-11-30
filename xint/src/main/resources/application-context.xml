@@ -25,28 +25,28 @@
 		</property>
 	</bean>
 
-	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${mysql.driver}" />
-		<property name="jdbcUrl" value="${liveshowcms.jdbc.url}" />
-		<property name="user" value="${liveshowcms.jdbc.username}" />
-		<property name="password" value="${liveshowcms.jdbc.password}" />
-		<property name="initialPoolSize" value="${liveshowcms.initialPoolSize}" />
-		<property name="minPoolSize" value="${liveshowcms.minPoolSize}" />
-		<property name="maxPoolSize" value="${liveshowcms.maxPoolSize}" />
-		<property name="acquireIncrement" value="${liveshowcms.acquireIncrement}" />
-		<property name="maxIdleTime" value="${liveshowcms.maxIdleTime}" />
-		<property name="checkoutTimeout" value="${liveshowcms.checkoutTimeout}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialPoolSize" value="${initialPoolSize}" />
+		<property name="minPoolSize" value="${minPoolSize}" />
+		<property name="maxPoolSize" value="${maxPoolSize}" />
+		<property name="acquireIncrement" value="${acquireIncrement}" />
+		<property name="maxIdleTime" value="${maxIdleTime}" />
+		<property name="checkoutTimeout" value="${checkoutTimeout}" />
 		<property name="testConnectionOnCheckin" value="true" />
-	</bean> -->
+	</bean>
 
-	<!-- <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
 		<property name="sqlMapClient">
 			<bean class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 				<property name="configLocation" value="classpath:sqlmap-config.xml" />
 				<property name="dataSource" ref="dataSource" />
 			</bean>
 		</property>
-	</bean> -->
+	</bean>
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">

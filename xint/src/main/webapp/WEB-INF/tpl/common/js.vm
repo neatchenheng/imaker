@@ -25,6 +25,7 @@
  <script src="$request.contextPath/static/ace/assets/js/ace-elements.min.js"></script>
  <script src="$request.contextPath/static/ace/assets/js/ace.min.js"></script>
 <script src="$request.contextPath/static/ace/assets/js/ace-extra.min.js"></script>
+<script src="$request.contextPath/static/ace/assets/js/base.js"></script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 <script src="$request.contextPath/static/ace/assets/js/html5shiv.js"></script>

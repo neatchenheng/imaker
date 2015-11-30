@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="UserDAO">
+	<resultMap class="com.i9144.xint.model.User" id="user">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="enabled" column="enabled"/>
+		<result property="createTime" column="create_time"/>
+		<result property="lastUpdate" column="last_update"/>
+	</resultMap>
+	
+	<sql id="allFields">
+	   a.id, a.name, a.phone, a.email, a.enabled, a.create_time, a.last_update
+	</sql>
+	<!-- User -->
+	<insert id="add" parameterClass="com.i9144.xint.model.User">
+        INSERT INTO tb_user(name, phone, email, enabled, password, create_time, last_update)
+        VALUES (#name#,#phone#,#email#,#enabled#,#password#, #createTime#,#lastUpdate#)
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT @@IDENTITY AS id
+        </selectKey>
+	</insert>
+
+	<delete id="delete" parameterClass="int">
+	    DELETE FROM tb_user WHERE id=#id#
+	</delete>
+	
+	<update id="update" parameterClass="com.i9144.xint.model.User">
+	    UPDATE tb_user
+	    SET name=#name#, phone=#phone#, email=#email#,enabled=#enabled#, password=#password#, last_update=#lastUpdate#
+	    WHERE id=#id#
+	</update>
+	
+	<select id="get" resultMap="user" parameterClass="int">
+	    SELECT <include refid="allFields"/>  FROM tb_user a WHERE a.id=#id#
+	</select>
+
+	<select id="list" resultMap="user" parameterClass="map">
+	    SELECT <include refid="allFields"/> FROM tb_user a LIMIT #offset#, #rows#
+	</select>
+</sqlMap>
