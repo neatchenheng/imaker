@@ -96,3 +96,21 @@ function deleteModuleCallback() {
 		});
 	});
 }
+
+$("#bindData100Form").submit(function() { 
+	var url = CONTEXT_PATH + "/pages/" + $("#pageId").val() + "/data";
+	$(this).ajaxSubmit({
+		url: url,
+		type: "post",
+		dataType: "json",
+		success: function(data) {
+			$("#bindData100Template").modal("hide");
+			var pageId = $("#pageId").val();
+			fillModuleTable(pageId);
+		},
+		error: function(data) {
+			alert(data);
+		}
+	});
+	return false;
+});

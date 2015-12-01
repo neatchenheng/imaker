@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.apache.velocity.tools.generic.DateTool;
@@ -14,9 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.i9144.xpage.exception.HelperException;
+import com.i9144.xpage.model.ModuleData;
 import com.i9144.xpage.model.Page;
+import com.i9144.xpage.service.ModuleDataService;
 import com.i9144.xpage.service.PageService;
 
 @Controller
@@ -24,6 +28,8 @@ public class PageAction {
 	private static final Logger logger = Logger.getLogger(PageAction.class);
 	@Resource
 	private PageService pageService;
+	@Resource
+	private ModuleDataService moduleDataService;
 
 	@RequestMapping(value = "channels/{channelId}/pages", method = RequestMethod.GET)
 	public String list(Model model, @PathVariable("channelId") int channelId) {
@@ -62,5 +68,11 @@ public class PageAction {
 		model.addAttribute("date", new DateTool());  
 		model.addAttribute("map", map);
 		return "pages/get";
+	}
+	
+	@RequestMapping(value="pages/{pageId}/data", method = RequestMethod.POST)
+	public @ResponseBody int bindData(HttpServletRequest request, @ModelAttribute  ModuleData moduleData) {
+		int result = moduleDataService.add(moduleData);
+		return result;
 	}
 }

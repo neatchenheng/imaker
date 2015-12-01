@@ -56,6 +56,7 @@
 
 #parse("/WEB-INF/tpl/pages/modal/add_module.vm")
 #parse("/WEB-INF/tpl/pages/modal/edit_module.vm")
+#parse("/WEB-INF/tpl/plugins/internal/100_bind_data.vm")
 
 #parse("/WEB-INF/tpl/common/js.vm")
 <script src="$request.contextPath/js/pages.js"></script>
