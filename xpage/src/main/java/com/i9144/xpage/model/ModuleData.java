@@ -3,6 +3,7 @@ package com.i9144.xpage.model;
 import java.util.Date;
 
 public class ModuleData {
+	private int id;
 	private int moduleId;
 	private int pluginId;
 	private String name;
@@ -12,6 +13,13 @@ public class ModuleData {
 	private Date createTime;
 	private Date updateTime;
 	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getModuleId() {
 		return moduleId;
 	}

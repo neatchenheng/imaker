@@ -19,12 +19,16 @@
   					<div class="panel panel-default">
   						<div class="panel-heading" role="tab" id="heading_${module.id}_${module.pluginId}">
   							<h4 class="panel-title">
-  								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_${module.id}_${module.pluginId}" aria-expanded="false" aria-controls="collapse_${module.id}_${module.pluginId}">
+  								<a class="bindedDataLink" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_${module.id}_${module.pluginId}" 
+									aria-expanded="false" aria-controls="collapse_${module.id}_${module.pluginId}" 
+									data-pluginId="$module.pluginId" data-moduleId="$module.id">
   									$!module.name [$!module.pluginName]
   								</a>
   							</h4>
   						</div>
-  						<div id="collapse_${module.id}_${module.pluginId}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_${module.id}_${module.pluginId}">
+  						<div id="collapse_${module.id}_${module.pluginId}" class="panel-collapse collapse" role="tabpanel" 
+								aria-labelledby="heading_${module.id}_${module.pluginId}"
+								data-pluginId="$module.pluginId" data-moduleId="$module.id">
   							#parse("/WEB-INF/tpl/plugins/internal/${module.pluginId}.vm")
   						</div>
   					</div>

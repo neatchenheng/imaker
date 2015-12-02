@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.i9144.xpage.exception.HelperException;
 import com.i9144.xpage.model.ModuleData;
@@ -69,10 +68,5 @@ public class PageAction {
 		model.addAttribute("map", map);
 		return "pages/get";
 	}
-	
-	@RequestMapping(value="pages/{pageId}/data", method = RequestMethod.POST)
-	public @ResponseBody int bindData(HttpServletRequest request, @ModelAttribute  ModuleData moduleData) {
-		int result = moduleDataService.add(moduleData);
-		return result;
-	}
+
 }

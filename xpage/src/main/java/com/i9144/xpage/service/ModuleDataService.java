@@ -46,4 +46,9 @@ public class ModuleDataService {
 		int result =  moduleDataDao.delete(moduleDataId);
 		return result;
 	}
+	
+	public List<ModuleData> getByModuleId(int moduleId) {
+		List<ModuleData> list = moduleDataDao.getByModuleId(moduleId);
+		return list;
+	}
 }

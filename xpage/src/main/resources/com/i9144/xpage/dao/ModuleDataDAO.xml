@@ -20,7 +20,7 @@
 	</sql>
 	<!-- ModuleData -->
 	<insert id="add" parameterClass="com.i9144.xpage.model.ModuleData">
-        INSERT INTO tb_module_data(module_id, plugin_id, name, url, pic, desc, create_time,update_time)
+        INSERT INTO tb_module_data(module_id, plugin_id, name, url, pic, `desc`, create_time,update_time)
         VALUES (#moduleId#,#pluginId#,#name#,#url#,#pic#, #desc#, #createTime#,#updateTime#)
         <selectKey resultClass="int" keyProperty="id">
             SELECT @@IDENTITY AS id
@@ -40,5 +40,9 @@
 	<select id="get" resultMap="moduleData" parameterClass="int">
 	    SELECT <include refid="allFields"/>  FROM tb_module_data a WHERE id=#id#
 	</select>
+
+	<select id="getByModuleId" resultMap="moduleData" parameterClass="int">
+	    SELECT <include refid="allFields"/>  FROM tb_module_data a WHERE module_id=#moduleId#
+	</select>	
 	
 </sqlMap>

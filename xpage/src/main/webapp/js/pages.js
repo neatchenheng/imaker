@@ -97,10 +97,21 @@ function deleteModuleCallback() {
 	});
 }
 
+$("#bindData100Template").on(
+		"show.bs.modal",
+		function(event) {
+			var div = $(event.relatedTarget).closest(".panel-collapse");
+			var moduleId = div.data("moduleid");
+			var pluginId = div.data("pluginid");
+			var modal = $(this);
+			modal.find(".modal-content form").attr("action",
+					CONTEXT_PATH + "/modules/" + moduleId  + "/data");
+			modal.find(".modal-body input[name='pluginId']").val(pluginId);
+			modal.find(".modal-body input[name='moduleId']").val(moduleId);
+		});
+
 $("#bindData100Form").submit(function() { 
-	var url = CONTEXT_PATH + "/pages/" + $("#pageId").val() + "/data";
 	$(this).ajaxSubmit({
-		url: url,
 		type: "post",
 		dataType: "json",
 		success: function(data) {
@@ -114,3 +125,19 @@ $("#bindData100Form").submit(function() {
 	});
 	return false;
 });
+
+/*$(".bindedDataLink").bind("click", function(event) {
+	
+});*/
+
+$(".collapse").on("shown.bs.collapse", function(event) {
+	var div = $(event.target);
+	var moduleId = div.data("moduleid");
+	var pluginId = div.data("pluginid");
+	fillBindedData(moduleId, pluginId);
+});
+
+function fillBindedData(moduleId, pluginId) {
+	$.getJSON(CONTEXT_PATH + "/modules/" + moduleId+ "/data", function(data) {
+	});
+}

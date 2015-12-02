@@ -11,4 +11,5 @@
 	<sqlMap resource="com/i9144/xpage/dao/ChannelDAO.xml"/>
 	<sqlMap resource="com/i9144/xpage/dao/PageDAO.xml"/>
 	<sqlMap resource="com/i9144/xpage/dao/ModuleDAO.xml"/>
+	<sqlMap resource="com/i9144/xpage/dao/ModuleDataDAO.xml"/>
 </sqlMapConfig>
