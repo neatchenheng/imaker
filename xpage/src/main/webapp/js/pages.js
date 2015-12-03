@@ -139,5 +139,6 @@ $(".collapse").on("shown.bs.collapse", function(event) {
 
 function fillBindedData(moduleId, pluginId) {
 	$.getJSON(CONTEXT_PATH + "/modules/" + moduleId+ "/data", function(data) {
+		$("#data100").loadTemplate(CONTEXT_PATH + "/templates/data100.html", data);
 	});
 }

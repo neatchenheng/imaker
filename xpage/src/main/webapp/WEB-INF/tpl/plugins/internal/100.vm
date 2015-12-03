@@ -3,6 +3,8 @@
 		<span class="label label-info">图文管理</span>
 	</div>
 	<div class="row-content">
+		<ul class="list-inline" id="data100">
+		</ul>
 		<ul class="list-inline">
 			<li><span class="add-btn"  data-toggle="modal" data-target="#bindData100Template">+</span></li>
 		</ul>
