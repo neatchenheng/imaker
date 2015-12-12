@@ -1,13 +1,16 @@
 <li>
 	<div>
 		 <div class="thumbnail">
-		 	<img data-template-bind='[{"attribute": "scr", "value": "pic"}]' />
+		 	<img style="width: 280px; height: 100px;" data-template-bind='[{"attribute": "src", "value": "pic"}]' /> 
 		 	<div class="caption">
 		 		<h3 data-content="name"></h3>
 		 		<p data-content="desc"></p>
 		 		<p>
-		 			<a href="#" class="btn btn-primary" role="button">修改</a>
-		 			<a href="#" class="btn btn-default" role="button">删除</a>
+		 			<a href="#" class="btn btn-primary edit-md-btn" role="button" 
+		 				data-template-bind='[{"attribute":"data-id", "value": "id"}, {"attribute": "data-pic", "value": "pic"} , 
+		 					{"attribute": "data-name", "value": "name"}, {"attribute": "data-desc", "value": "desc"},  {"attribute": "data-url", "value": "url"}, 
+		 					{"attribute": "data-moduleId", "value": "moduleId"}, {"attribute": "data-pluginId", "value": "pluginId"}]'>修改</a>
+		 			<a href="#" class="btn btn-default del-md-btn" role="button" data-template-bind='[{"attribute":"data-id", "value": "id"}]'>删除</a>
 		 		</p>
 		 	</div>
 		 </div>

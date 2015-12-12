@@ -18,19 +18,46 @@ import com.i9144.xpage.service.ModuleDataService;
 
 @Controller
 public class ModuleDataAction {
-	private static final Logger logger = Logger.getLogger(ModuleDataAction.class);
+	private static final Logger logger = Logger
+			.getLogger(ModuleDataAction.class);
 	@Resource
 	private ModuleDataService moduleDataService;
 
-	@RequestMapping(value="modules/{moduleId}/data", method = RequestMethod.POST)
-	public @ResponseBody int bindData(HttpServletRequest request, @ModelAttribute  ModuleData moduleData) {
+	@RequestMapping(value = "modules/{moduleId}/data", method = RequestMethod.POST)
+	public @ResponseBody
+	int bindData(HttpServletRequest request,
+			@ModelAttribute ModuleData moduleData) {
 		int result = moduleDataService.add(moduleData);
 		return result;
 	}
-	
-	@RequestMapping(value="modules/{moduleId}/data", method = RequestMethod.GET)
-	public @ResponseBody List<ModuleData> getByModuleId(HttpServletRequest request, @PathVariable("moduleId") int moduleId) {
+
+	@RequestMapping(value = "modules/{moduleId}/data", method = RequestMethod.GET)
+	public @ResponseBody
+	List<ModuleData> getByModuleId(HttpServletRequest request,
+			@PathVariable("moduleId") int moduleId) {
 		List<ModuleData> list = moduleDataService.getByModuleId(moduleId);
 		return list;
+	}
+
+	@RequestMapping(value = "modules/{moduleId}/data/{mdId}", method = RequestMethod.DELETE)
+	public @ResponseBody
+	int deleteModuleData(HttpServletRequest request,
+			@PathVariable("moduleId") int moduleId,
+			@PathVariable("mdId") int mdId) {
+		return moduleDataService.delete(mdId);
+		//List<ModuleData> list = moduleDataService.getByModuleId(moduleId);
+		//return list;
+	}
+	
+	@RequestMapping(value = "modules/{moduleId}/data/{mdId}", method = RequestMethod.POST)
+	public @ResponseBody
+	int updateModuleData(HttpServletRequest request,
+			@PathVariable("moduleId") int moduleId,
+			@PathVariable("mdId") int mdId,
+			@ModelAttribute ModuleData moduleData) {
+		moduleData.setId(mdId);
+		return moduleDataService.update(moduleData);
+		//List<ModuleData> list = moduleDataService.getByModuleId(moduleId);
+		//return list;
 	}
 }

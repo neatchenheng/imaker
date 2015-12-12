@@ -115,9 +115,11 @@ $("#bindData100Form").submit(function() {
 		type: "post",
 		dataType: "json",
 		success: function(data) {
+			var moduleId = $("input[name='moduleId']").val();
+			var pluginId = $("input[name='pluginId']").val();
+			$("#bindData100Form")[0].reset();
 			$("#bindData100Template").modal("hide");
-			var pageId = $("#pageId").val();
-			fillModuleTable(pageId);
+			fillBindedData(moduleId, pluginId);
 		},
 		error: function(data) {
 			alert(data);
@@ -129,16 +131,71 @@ $("#bindData100Form").submit(function() {
 /*$(".bindedDataLink").bind("click", function(event) {
 	
 });*/
+$(".collapse").on("show.bs.collapse", function(event) {
+	var div = $(event.target);
+	var moduleId = div.data("moduleid");
+	$.getJSON(CONTEXT_PATH + "/modules/" + moduleId+ "/data", function(data) {
+		var html = $("#data100").loadTemplate(CONTEXT_PATH + "/templates/data100.html", data);
+		console.log(html);
+	});
+});
 
 $(".collapse").on("shown.bs.collapse", function(event) {
 	var div = $(event.target);
 	var moduleId = div.data("moduleid");
 	var pluginId = div.data("pluginid");
-	fillBindedData(moduleId, pluginId);
+	callAfterfillBindedData(moduleId, pluginId);
 });
 
 function fillBindedData(moduleId, pluginId) {
 	$.getJSON(CONTEXT_PATH + "/modules/" + moduleId+ "/data", function(data) {
-		$("#data100").loadTemplate(CONTEXT_PATH + "/templates/data100.html", data);
+		var html = $("#data100").loadTemplate(CONTEXT_PATH + "/templates/data100.html", data);
+		console.log(html);
+		callAfterfillBindedData(moduleId, pluginId);
 	});
 }
+
+function callAfterfillBindedData(moduleId, pluginId) {
+	$(".del-md-btn").bind("click", function(event) {
+		var mdId = $(event.target).data("id");
+		jQuery.ajax({
+			url : CONTEXT_PATH + "/modules/" + moduleId + "/data/" + mdId,
+			type : "DELETE",
+			success : function(data) {
+				fillBindedData(moduleId, pluginId);
+			}
+		});
+	});
+	$(".edit-md-btn").bind("click", function(event) {
+		$("#editBindedData100Template").modal("show");
+		var et = $("#editBindedData100Template");
+		var a = $(event.target);
+		et.find(".modal-content form").attr("action",
+				CONTEXT_PATH + "/modules/" + moduleId  + "/data/"  + a.data("id") );
+		et.find("input[name=moduleId]").val(a.data("moduleid"));
+		et.find("input[name=pluginId]").val(a.data("pluginid"));
+		et.find("input[name=name]").val(a.data("name"));
+		et.find("input[name=pic]").val(a.data("pic"));
+		et.find("input[name=url]").val(a.data("url"));
+		et.find("textarea[name=desc]").val(a.data("desc"));
+	});
+}
+
+$("#editBindedData100Form").submit(function() { 
+	$(this).ajaxSubmit({
+		type: "post",
+		dataType: "json",
+		success: function(data) {
+			var et = $("#editBindedData100Template");
+			var moduleId = et.find("input[name=moduleId]").val();
+			var pluginId = et.find("input[name=pluginId]").val();
+			$("#editBindedData100Form")[0].reset();
+			$("#editBindedData100Template").modal("hide");
+			fillBindedData(moduleId, pluginId);
+		},
+		error: function(data) {
+			alert(data);
+		}
+	});
+	return false;
+});
