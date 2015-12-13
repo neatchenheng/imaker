@@ -4,45 +4,54 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="ModuleDataDAO">
 	<resultMap class="com.i9144.xpage.model.ModuleData" id="moduleData">
-		<result property="id" column="id"/>
-		<result property="moduleId" column="module_id"/>
-		<result property="pluginId" column="plugin_id"/>
-		<result property="name" column="name"/>
-		<result property="url" column="url"/>
-		<result property="pic" column="pic"/>
-		<result property="desc" column="desc"/>
-		<result property="createTime" column="create_time"/>
-		<result property="updateTime" column="update_time"/>
+		<result property="id" column="id" />
+		<result property="moduleId" column="module_id" />
+		<result property="pluginId" column="plugin_id" />
+		<result property="name" column="name" />
+		<result property="url" column="url" />
+		<result property="pic" column="pic" />
+		<result property="desc" column="desc" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
 	</resultMap>
-	
+
 	<sql id="allFields">
-	   a.id, a.module_id, a.plugin_id, a.name, a.url, a.pic, a.desc, a.create_time, a.update_time
+		a.id, a.module_id, a.plugin_id, a.name, a.url, a.pic, a.desc,
+		a.create_time, a.update_time
 	</sql>
 	<!-- ModuleData -->
 	<insert id="add" parameterClass="com.i9144.xpage.model.ModuleData">
-        INSERT INTO tb_module_data(module_id, plugin_id, name, url, pic, `desc`, create_time,update_time)
-        VALUES (#moduleId#,#pluginId#,#name#,#url#,#pic#, #desc#, #createTime#,#updateTime#)
-        <selectKey resultClass="int" keyProperty="id">
-            SELECT @@IDENTITY AS id
-        </selectKey>
+		INSERT INTO tb_module_data(module_id, plugin_id, name, url, pic,
+		`desc`, create_time,update_time)
+		VALUES (#moduleId#,#pluginId#,#name#,#url#,#pic#, #desc#,
+		#createTime#,#updateTime#)
+		<selectKey resultClass="int" keyProperty="id">
+			SELECT @@IDENTITY AS id
+		</selectKey>
 	</insert>
 
 	<delete id="delete" parameterClass="int">
-	    DELETE FROM tb_module_data WHERE id=#id#
+		DELETE FROM tb_module_data WHERE id=#id#
 	</delete>
-	
+
 	<update id="update" parameterClass="com.i9144.xpage.model.ModuleData">
-	    UPDATE tb_module_data
-	    SET name=#name#, url=#url#, pic=#pic#, `desc`=#desc#, update_time=#updateTime#
-	    WHERE id=#id#
+		UPDATE tb_module_data
+		SET name=#name#, url=#url#, pic=#pic#, `desc`=#desc#,
+		update_time=#updateTime#
+		WHERE id=#id#
 	</update>
-	
+
 	<select id="get" resultMap="moduleData" parameterClass="int">
-	    SELECT <include refid="allFields"/>  FROM tb_module_data a WHERE id=#id#
+		SELECT
+		<include refid="allFields" />
+		FROM tb_module_data a WHERE id=#id#
 	</select>
 
-	<select id="getByModuleId" resultMap="moduleData" parameterClass="int">
-	    SELECT <include refid="allFields"/>  FROM tb_module_data a WHERE module_id=#moduleId#
-	</select>	
-	
+	<select id="getByModuleId" resultMap="moduleData"
+		parameterClass="int">
+		SELECT
+		<include refid="allFields" />
+		FROM tb_module_data a WHERE module_id=#moduleId#
+	</select>
+
 </sqlMap>

@@ -1,6 +1,7 @@
 package com.i9144.xpage.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Module extends Model {
 	private int id;
@@ -30,6 +31,10 @@ public class Module extends Model {
 	private int position;
 	private Date createTime;
 	private Date updateTime;
+	/**
+	 * 绑定模块数据
+	 */
+	private List<ModuleData> mdList;
 	
 	public int getId() {
 		return id;
@@ -86,4 +91,25 @@ public class Module extends Model {
 		this.updateTime = updateTime;
 	}
 	
+	public List<ModuleData> getMdList() {
+		return mdList;
+	}
+	public void setMdList(List<ModuleData> mdList) {
+		this.mdList = mdList;
+	}
+
+
+
+	public static enum Status {
+		ENABLE(1), DISABLE(0);
+		
+		private int value;
+		private Status(int value) {
+			this.value = value;
+		}
+		
+		public int getValue() {
+			return this.value;
+		}
+	}
 }

@@ -29,6 +29,10 @@ public class Page extends Model {
 	 */
 	private String url;
 	/**
+	 * 页面icon
+	 */
+	private String icon;
+	/**
 	 * 业页编辑
 	 */
 	private String editor;
@@ -86,6 +90,12 @@ public class Page extends Model {
 	}
 	public void setMetaDesc(String metaDesc) {
 		this.metaDesc = metaDesc;
+	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 	public int getStatus() {
 		return status;

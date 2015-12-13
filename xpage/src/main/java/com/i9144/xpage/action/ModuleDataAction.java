@@ -45,8 +45,6 @@ public class ModuleDataAction {
 			@PathVariable("moduleId") int moduleId,
 			@PathVariable("mdId") int mdId) {
 		return moduleDataService.delete(mdId);
-		//List<ModuleData> list = moduleDataService.getByModuleId(moduleId);
-		//return list;
 	}
 	
 	@RequestMapping(value = "modules/{moduleId}/data/{mdId}", method = RequestMethod.POST)
@@ -57,7 +55,5 @@ public class ModuleDataAction {
 			@ModelAttribute ModuleData moduleData) {
 		moduleData.setId(mdId);
 		return moduleDataService.update(moduleData);
-		//List<ModuleData> list = moduleDataService.getByModuleId(moduleId);
-		//return list;
 	}
 }

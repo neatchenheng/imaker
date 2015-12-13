@@ -3,7 +3,7 @@
 <div class="container">
 	<ol class="breadcrumb">
 		<li><a href="$request.contextPath/channels/$map.page.channelId/pages">频道</a></li>
-		<li>页面</li>
+		<li>页面<a style="float: right" role="button" target="_blank" href="$request.contextPath/pages/$map.page.id/preview">(预览)</a></li>
 	</ol>
 </div>
 
@@ -24,6 +24,8 @@
 									data-pluginId="$module.pluginId" data-moduleId="$module.id">
   									$!module.name [$!module.pluginName]
   								</a>
+								<a style="float: right" role="button" target="_blank" href="$request.contextPath/pages/$map.page.id/preview?mid=$module.id">预览
+								</a>
   							</h4>
   						</div>
   						<div id="collapse_${module.id}_${module.pluginId}" class="panel-collapse collapse" role="tabpanel" 

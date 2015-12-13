@@ -1,10 +1,11 @@
 package com.i9144.xpage.action;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.velocity.tools.generic.DateTool;
@@ -14,10 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.i9144.xpage.exception.HelperException;
-import com.i9144.xpage.model.ModuleData;
 import com.i9144.xpage.model.Page;
 import com.i9144.xpage.service.ModuleDataService;
 import com.i9144.xpage.service.PageService;
@@ -60,13 +61,26 @@ public class PageAction {
 		int result = pageService.update(page);
 		return result;
 	}
-	
-	@RequestMapping(value="pages/{pageId}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "pages/{pageId}", method = RequestMethod.GET)
 	public String get(Model model, @PathVariable("pageId") int pageId) {
 		Map<String, Object> map = pageService.get(pageId);
-		model.addAttribute("date", new DateTool());  
+		model.addAttribute("date", new DateTool());
 		model.addAttribute("map", map);
 		return "pages/get";
+	}
+
+	@RequestMapping(value = "pages/{pageId}/preview", method = RequestMethod.GET)
+	public void preview(Model model, @PathVariable("pageId") int pageId,
+			@RequestParam(value = "mid", required = false, defaultValue = "0") int mid,
+			HttpServletResponse response) {
+		response.setCharacterEncoding("utf-8");
+		try {
+			String html = pageService.getPageContent(pageId, mid);
+			response.getWriter().write(html);
+		} catch (Exception e) {
+			logger.error("!!!! Exception", e);
+		}
 	}
 
 }

@@ -13,4 +13,5 @@ public class ModuleDAO extends AbstractDAO<Module> {
 		List<Module> modules = getSqlMapClient().queryForList(daoName + ".getByPageId", pageId);
 		return modules;
 	}
+	
 }

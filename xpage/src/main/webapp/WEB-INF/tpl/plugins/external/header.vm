@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>$!data.page.title</title>
+	<meta name="description" content="$!data.page.metaDesc">
+	<meta name="keywords" content="$!data.page.metaKeywords">
+	<link rel="Shortcut Icon" href="$!data.page.icon" type="image/x-icon"/>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+</head>
+<body>

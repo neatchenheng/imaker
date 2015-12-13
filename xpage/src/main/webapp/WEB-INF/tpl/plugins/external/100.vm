@@ -1,0 +1,32 @@
+<!-- plugin 100 START -->
+<div class="container">
+    <div id="carousel-100" class="carousel slide" data-ride="carousel">
+    	<!-- Indicators -->
+    	<ol class="carousel-indicators">
+    		#foreach($md in $data.module.mdList)
+    			#set($i = $velocityCount - 1)
+    			<li data-target="#carousel-100" data-slide-to="$i" #if($velocityCount == 1) class="active" #end></li>
+    		#end
+    	</ol>
+    	<div class="carousel-inner" role="listbox">
+    	#foreach($md in $data.module.mdList)
+    		<div #if($velocityCount == 1)  class="item active" #else class="item" #end>
+    			<img src="$md.pic" alt=$md.name">
+    			<div class="carousel-caption">
+    				<!--<h3>$md.name<h3>
+					<p>$md.desc</p>-->
+    			</div>
+            </div>
+    	#end
+      </div>
+      <a class="left carousel-control" href="#carousel-100" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-100" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+</div>
+<!-- plugin 100 END -->
