@@ -73,13 +73,60 @@ function fillModuleTable(pageId) {
 	$.getJSON(CONTEXT_PATH + "/pages/" + pageId + "/modules", function(data) {
 		$("#modules_table tbody").loadTemplate(
 				CONTEXT_PATH + "/templates/modules.html", data, {
-					success : deleteModuleCallback
+					success : moduleLoadedCallback
 				});
+	});
+}
+
+function moduleLoadedCallback() {
+	draggableModuleCallback();
+	deleteModuleCallback();
+}
+
+function draggableModuleCallback() {
+	var indicator = $('<div class="indicator">>></div>').appendTo('body');
+	$('.drag-item').draggable({
+		revert: true,
+		deltaX:0,
+		deltaY:0
+	}).droppable({
+		onDragEnter:function(e,source){
+			indicator.css({
+				display:'block',
+				left:$(this).offset().left-10,
+				top:$(this).offset().top+$(this).outerHeight()-5
+			});
+		},
+		onDragLeave:function(e,source){
+			indicator.hide();
+		},
+		onDrop:function(e,source){
+			$(source).insertAfter(this);
+			indicator.hide();
+			var tbody = $(e.target).parent();
+			var mids = [];
+			$.each(tbody.find('tr'), function(i, tr) {
+				mids.push($(tr).data("id"));
+			});
+			var pageId = $("#pageId").val();
+			jQuery.ajax({
+				url : pageId + "/modules",
+				type : "PUT",
+				dataType: "json",
+				data: mids.toString(),
+				success : function(data) {
+					if (data > 0) {
+						fillModuleTable(pageId);
+					}
+				}
+			});
+		}
 	});
 }
 
 function deleteModuleCallback() {
 	$(".deleteModuleLink").bind("click", function(event) {
+		event.defaultPrevented;
 		var result = confirm("确认删除吗？");
 		if (! result) {
 			return;
@@ -134,8 +181,10 @@ $("#bindData100Form").submit(function() {
 $(".collapse").on("show.bs.collapse", function(event) {
 	var div = $(event.target);
 	var moduleId = div.data("moduleid");
+	var pluginId = div.data("pluginid");
 	$.getJSON(CONTEXT_PATH + "/modules/" + moduleId+ "/data", function(data) {
-		var html = $("#data100").loadTemplate(CONTEXT_PATH + "/templates/data100.html", data);
+		var tmpId = "data" + pluginId;
+		var html = $("#" + tmpId).loadTemplate(CONTEXT_PATH + "/templates/" + tmpId + ".html", data);
 		console.log(html);
 	});
 });
@@ -149,7 +198,8 @@ $(".collapse").on("shown.bs.collapse", function(event) {
 
 function fillBindedData(moduleId, pluginId) {
 	$.getJSON(CONTEXT_PATH + "/modules/" + moduleId+ "/data", function(data) {
-		var html = $("#data100").loadTemplate(CONTEXT_PATH + "/templates/data100.html", data);
+		var tmpId = "data" + pluginId;
+		var html = $("#" + tmpId).loadTemplate(CONTEXT_PATH + "/templates/" + tmpId + ".html", data);
 		console.log(html);
 		callAfterfillBindedData(moduleId, pluginId);
 	});

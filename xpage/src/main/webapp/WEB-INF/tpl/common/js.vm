@@ -8,6 +8,7 @@
 <script src="$request.contextPath/js/jquery.form.min.js"></script>
 <script src="$request.contextPath/js/jquery.loadTemplate-1.4.4.min.js"></script>
 <script src="$request.contextPath/js/jquery.formatDateTime.min.js"></script>
+<script src="$request.contextPath/js/jquery.easyui.min.js"></script>
 <script src="$request.contextPath/js/common.js"></script>
 <script>
   var _hmt = _hmt || [];

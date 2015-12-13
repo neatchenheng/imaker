@@ -45,3 +45,12 @@
 .label-info {
 	background-color: #3a87ad;
 }
+
+.indicator {
+	position:absolute;
+	font-size:9px;
+	width:10px;
+	height:10px;
+	display:none;
+	color:red;
+}

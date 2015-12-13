@@ -53,4 +53,14 @@ public class ModuleService {
 		int result =  moduleDao.delete(moduleId);
 		return result;
 	}
+	
+	public int sort(String[] ids) {
+		int i = 1;
+		Date now = new Date();
+		int result = 0;
+		for (String id: ids) {
+			result = result + moduleDao.sort(Integer.parseInt(id), i ++ , now);
+		}
+		return result;
+	}
 }

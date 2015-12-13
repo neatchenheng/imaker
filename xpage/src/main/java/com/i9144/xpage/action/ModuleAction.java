@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +31,15 @@ public class ModuleAction {
 		return modules;
 	}
 
+	@RequestMapping(value = "pages/{pageId}/modules", method = RequestMethod.PUT)
+	public @ResponseBody int sort(@PathVariable("pageId") int pageId,@RequestBody String mids) {
+		if (StringUtils.isNotBlank(mids)) {
+			String[] ids = mids.split(",");
+			return moduleService.sort(ids);
+		}
+		return 0;
+	}
+	
 	@RequestMapping(value = "pages/{pageId}/modules", method = RequestMethod.POST)
 	public @ResponseBody int save(Model model, @ModelAttribute Module module,
 			@PathVariable("pageId") int pageId) {
